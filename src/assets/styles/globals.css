@@ -10,3 +10,88 @@ body {
   font-family: var(--font-main);
 }
 
+.table-card {
+  background: var(--bg-light);
+  border: 5px solid color-mix(in oklch, var(--bg-dark), transparent 70%);
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+
+.table-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-light) transparent;
+}
+
+
+.table-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: color-mix(in oklch, var(--text-light), transparent 40%);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in oklch, var(--text-dark), transparent 50%);
+}
+
+.table-base {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-main);
+}
+
+.table-head {
+  position: sticky;
+  top: 0;
+  background: var(--bg-light);
+  z-index: 10;
+}
+
+.table-th {
+  font-size: var(--fs-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 16px;
+  border-bottom: 4px solid rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.table-td {
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-dark);
+  padding: 12px 16px;
+  border-bottom: 3px solid rgba(0,0,0,0.06);
+}
+
+.table-row:hover {
+  background: color-mix(in oklch, var(--bg-light), black 5%);
+  transition: 0.2s ease;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-top: 4px solid rgba(0, 0, 0, 0.08);
+  font-size: var(--fs-xs);
+  color: var(--text-dark);
+}
+
+.table-th:not(:last-child),
+.table-td:not(:last-child) {
+  border-right: 5px solid color-mix(in oklch, var(--text-dark), transparent 70%);
+}
