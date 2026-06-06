@@ -1,4 +1,5 @@
 import React from 'react';
+import './ExcelPreviewTable.css';
 
 const mockData = [
   { clientCode: 'CL001', productCode: 'PR001' },
