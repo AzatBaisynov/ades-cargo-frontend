@@ -1,0 +1,58 @@
+.import-container {
+  padding: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+.import-click {
+  background-color: var(--bg-light);
+  color: #0f0e0e;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: var(--font-weigth-regular);
+  font-size: 14px;
+  transition:  0.2s;
+}
+.import-click:hover {
+  background-color: var(--bg-dark);
+}
+.import-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8px 16px;
+  color: var(--bg-dark);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.import-overlay {
+  position: fixed;
+  top: 0;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.import-content {
+  background-color: var(--text-light);
+  padding: 32px;
+  border-radius: 16px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.import-title {
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 8px 0;
+}
+.import-status {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
