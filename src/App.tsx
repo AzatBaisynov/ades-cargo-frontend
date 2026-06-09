@@ -1,13 +1,18 @@
 import { ExcelPreviewTable } from './features/import-excel/ui/ExcelPreviewTable';
 import { ExcelUpload } from './features/import-excel/ui/ExcelUpload';
 
+import { ImportChinaButton } from "./features/import-excel/ui/importchina-button";
+const App = () => {
 
-function App() {
   return (
+
     <div className="excel-page">
   <ExcelUpload />
   <ExcelPreviewTable />
-</div>
+      <ImportChinaButton 
+          previewData={[]}/>
+    </div>
+
   );
 }
 export default App;
