@@ -1,11 +1,10 @@
-import { ExcelPreviewTable } from './features/import-excel/ui/ExcelPreviewTable';
-import { ImportExcel } from './pages/ImportExcel/ImportExcel';
+import { ImportChinaButton } from "./features/import-excel/ui/importchina-button";
+const App = () => {
 
-function App() {
   return (
-    <div className="p-6">
-      <ExcelPreviewTable />
-      <ImportExcel/>
+    <div className="p-20">
+        <ImportChinaButton 
+          previewData={[]}/>
     </div>
   );
 }

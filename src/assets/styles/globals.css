@@ -1,12 +1,12 @@
-@import "tailwindcss";
 
+/* @import "./reset.css"; */
 @import "./font.css";
-@import "./reset.css";
 @import "./varialbles.css";
-
+@import "tailwindcss";
 
 
 body {
   font-family: var(--font-main);
 }
 
+.import-btn{}
