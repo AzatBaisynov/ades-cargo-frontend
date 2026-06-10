@@ -12,7 +12,7 @@ const initialState: ExcelState = {
   loading: false,
   success: false,
   message: '',
-   data: [],
+  data: [],
 };
 
 const excelSlice = createSlice({
@@ -22,17 +22,14 @@ const excelSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(uploadExcel.pending, (state) => {
-  state.loading = true;
-  state.success = false;
-  state.message = '';
-})
+        state.loading = true;
+        state.success = false;
+        state.message = '';
+      })
 
 .addCase(uploadExcel.fulfilled, (state, action) => {
   state.loading = false;
   state.success = true;
-
-  state.message = action.payload?.message ?? '';
-
   state.data = action.payload?.data ?? action.payload ?? [];
 })
 

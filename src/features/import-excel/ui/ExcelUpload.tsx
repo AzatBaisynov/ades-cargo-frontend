@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
-import { useAppDispatch } from '@/app/store/hooks';
-import { uploadExcel } from '../model/excelThunk';
+import { useAppDispatch } from "@/app/store/hooks";
+import { uploadExcel } from "../model/excelThunk";
+import { toast } from "react-toastify";
 import "./ExcelUpload.css";
 
 export const ExcelUpload = () => {
-  const dispatch = useAppDispatch(); 
+  const dispatch = useAppDispatch();
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -19,20 +20,28 @@ export const ExcelUpload = () => {
   };
 
   const handleFile = async (file?: File) => {
-  if (!file) return;
+    if (!file) return;
 
-  if (!isExcelFile(file)) {
-    alert("Можно загружать только Excel файлы (.xls, .xlsx)");
-    return;
-  }
+    if (!isExcelFile(file)) {
+      toast.error("Можно загружать только Excel файлы (.xls, .xlsx)");
+      return;
+    }
 
-  try {
-    dispatch(uploadExcel(file)); 
+    try {
+      const result = await dispatch(uploadExcel(file));
 
-  } catch (error) {
-    console.error("Upload error:", error);
-  }
-};
+      if (uploadExcel.fulfilled.match(result)) {
+        toast.success("Файл успешно загружен");
+      }
+
+      if (uploadExcel.rejected.match(result)) {
+        toast.error("Файл не загружен");
+      }
+    } catch {
+      toast.error("Файл не загружен");
+    }
+  };
+
   const handleClick = () => {
     inputRef.current?.click();
   };
@@ -52,32 +61,32 @@ export const ExcelUpload = () => {
 
   return (
     <div className="excel-upload-wrapper">
-    <div
-  className={`excel-upload ${isDragging ? 'excel-upload--dragging' : ''}`}
-  onClick={handleClick}
-  onDragOver={(e) => {
-    e.preventDefault();
-    setIsDragging(true);
-  }}
-  onDragLeave={() => setIsDragging(false)}
-  onDrop={handleDrop}
->
-  <input
-    ref={inputRef}
-    type="file"
-    accept=".xls,.xlsx"
-    onChange={handleChange}
-    hidden
-  />
+      <div
+        className={`excel-upload ${
+          isDragging ? "excel-upload--dragging" : ""
+        }`}
+        onClick={handleClick}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setIsDragging(true);
+        }}
+        onDragLeave={() => setIsDragging(false)}
+        onDrop={handleDrop}
+      >
+        <input
+          ref={inputRef}
+          type="file"
+          accept=".xls,.xlsx"
+          onChange={handleChange}
+          hidden
+        />
 
-  <div className="excel-upload__icon">
-    ⬆
-  </div>
+        <div className="excel-upload__icon">⬆</div>
 
-  <p className="excel-upload__text">
-    Перетащите файл excel или нажмите для выбора
-  </p>
-</div>
-</div>
+        <p className="excel-upload__text">
+          Перетащите файл excel или нажмите для выбора
+        </p>
+      </div>
+    </div>
   );
 };

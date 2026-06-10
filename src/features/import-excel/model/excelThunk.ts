@@ -1,17 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { uploadExcelRequest } from '../api/uploadExcel';
+import axios from 'axios';
 
 export const uploadExcel = createAsyncThunk(
   'excel/upload',
   async (file: File, thunkAPI) => {
     try {
-      const data = await uploadExcelRequest(file);
+      return await uploadExcelRequest(file);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return thunkAPI.rejectWithValue(
+          error.response?.data?.message || 'Ошибка загрузки файла',
+        );
+      }
 
-      console.log('BACKEND RESPONSE:', data);
-
-      return data;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue('Неизвестная ошибка');
     }
   },
 );
