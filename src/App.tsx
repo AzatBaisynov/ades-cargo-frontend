@@ -3,13 +3,16 @@ import { ExcelUpload } from './features/import-excel/ui/ExcelUpload';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { ImportChinaButton } from "./features/import-excel/ui/importchina-button";
+const App = () => {
 
-function App() {
   return (
+
     <div className="excel-page">
   <ExcelUpload />
   <ExcelPreviewTable />
-  <ToastContainer
+
+   <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -18,7 +21,11 @@ function App() {
         pauseOnHover
         draggable
       />
-</div>
+      
+      <ImportChinaButton 
+          previewData={[]}/>
+    </div>
+
   );
 }
 export default App;
