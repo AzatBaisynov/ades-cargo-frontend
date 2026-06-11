@@ -1,0 +1,53 @@
+.excel-upload-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.excel-upload {
+  width: 100%;
+  max-width: 1200px;
+
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  border-radius: 12px;
+
+  border: 2px dashed color-mix(in oklch, var(--text-light), transparent 40%);
+  background: var(--bg-light);
+
+  color: var(--text-dark);
+  font-family: var(--font-main);
+
+  transition: all 0.25s ease;
+}
+
+.excel-upload:hover {
+  border-color: var(--bg-dark);
+  background: color-mix(in oklch, var(--bg-light), var(--bg-dark) 4%);
+  transform: translateY(-1px);
+}
+
+.excel-upload--dragging {
+  background: color-mix(in oklch, var(--bg-light), var(--bg-dark) 8%);
+  border-color: var(--bg-dark);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.excel-upload__text {
+  font-size: var(--fs-sm);
+  color: var(--text-dark);
+  margin-top: 10px;
+}
+
+.excel-upload__icon {
+  font-size: var(--fs-xl);
+  color: var(--bg-dark);
+  margin-bottom: 10px;
+}
