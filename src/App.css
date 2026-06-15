@@ -1,7 +1,6 @@
-.excel-page {
+/* .excel-page {
   display: flex;
   flex-direction: column;
   align-items: center; /* центр по горизонтали */
-  gap: 20px; /* расстояние между инпутом и таблицей */
-  padding-top: 40px;
-}
+  /* gap: 20px; расстояние между инпутом и таблицей */
+  /* padding-top: 40px; }

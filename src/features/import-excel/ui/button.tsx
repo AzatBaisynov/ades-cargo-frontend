@@ -5,16 +5,17 @@ interface ButtonProps  extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     isLoading?:boolean
    
 }
-export const Button : React.FC<ButtonProps> = ({isLoading,disabled, className='', ...props}) => {
+export const Button : React.FC<ButtonProps> = ({isLoading,disabled, children,className='', ...props}) => {
     return (
     <button
       disabled={disabled || isLoading}
       className={`
-      bg-lime-800 flex  hover:bg-lime-400 rounded-xl  justify-center items-center
+      bg-lime-800 flex p-1 hover:bg-lime-400 rounded-xl  justify-center items-center 
+      transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 
         ${className}
       `}
       {...props}
-    >
+    >{isLoading ? "Сохранение..." : children}
     </button>
   );
 }
