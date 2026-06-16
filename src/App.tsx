@@ -1,15 +1,14 @@
-import { ExcelPreviewTable } from './features/import-excel/ui/ExcelPreviewTable';
-import { ExcelUpload } from './features/import-excel/ui/ExcelUpload';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ImportChinaButton } from "./features/import-excel/ui/importchina-button";
-import {    previewData } from './features/import-excel/ui/mock.data';
 import { useAppSelector } from './app/store/hooks';
+import { IssuePage } from './pages/Issuance';
+import { ExcelPreviewTable, ExcelUpload, ImportChinaButton } from "./features/import-excel";
 const App = () => {
 
   return (
 
     <div className="excel-page">
+      <IssuePage/> 
   <ExcelUpload />
   <ExcelPreviewTable />
    <ToastContainer
