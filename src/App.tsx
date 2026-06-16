@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ImportChinaButton } from "./features/import-excel/ui/importchina-button";
 import {    previewData } from './features/import-excel/ui/mock.data';
+import { useAppSelector } from './app/store/hooks';
 const App = () => {
 
   return (
@@ -22,7 +23,7 @@ const App = () => {
       />
       
       <ImportChinaButton 
-          previewData={previewData}/>
+          previewData={useAppSelector((state) => state.excel.data)}/>
     </div>
 
   );

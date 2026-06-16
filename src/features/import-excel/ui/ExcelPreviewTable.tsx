@@ -6,8 +6,6 @@ import { columnLabels} from '../model/columnLabels';
 export const ExcelPreviewTable = () => {
   const data = useAppSelector((state) => state.excel.data);
   
-
-
   return (
     <div className="table-wrapper">
       <div className="table-container">
