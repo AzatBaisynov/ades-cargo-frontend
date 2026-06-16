@@ -45,7 +45,7 @@ export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewDat
       <Button 
         onClick={handleImport}
         disabled={previewData.length === 0 || loading} 
-        className="font-(--fontweight-regular) min-w-[150px]"
+        className="font-(--fontweight-regular) min-w-37.5"
         isLoading= {loading}
         >
   import
