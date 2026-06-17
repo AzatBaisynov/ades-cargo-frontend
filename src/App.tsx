@@ -1,31 +1,19 @@
-import { ExcelPreviewTable } from './features/import-excel/ui/ExcelPreviewTable';
-import { ExcelUpload } from './features/import-excel/ui/ExcelUpload';
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { ImportChinaButton } from "./features/import-excel/ui/importchina-button";
-import {    previewData } from './features/import-excel/ui/mock.data';
-import { useAppSelector } from './app/store/hooks';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainLayout from "@/layouts/MainLayout";
+import ExcelPage from "@/pages/ImportExcel/ExcelPage";
+import ProductPage from "@/pages/ProductPage/ProductPage";
+
 const App = () => {
-
   return (
-
-    <div className="excel-page">
-  <ExcelUpload />
-  <ExcelPreviewTable />
-   <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        pauseOnHover
-        draggable
-      />
-      
-      <ImportChinaButton 
-          previewData={useAppSelector((state) => state.excel.data)}/>
-    </div>
-
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<ExcelPage />} />
+          <Route path="/products" element={<ProductPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
+
 export default App;
