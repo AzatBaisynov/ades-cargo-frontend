@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 interface ImportChinaButtonProps {
   previewData: Array<{customer_code:string ,product_code:string}>
-  
+  onSuccess?: () => void;
 }
 
-export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewData }) => {
+export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewData, onSuccess }) => {
  const [loading ,setLoading] = useState(false)
   const handleImport = async () => {
     if (!previewData || previewData.length === 0) {
@@ -23,7 +23,7 @@ export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewDat
 
       if (response.status === 200 || response.status === 201) {
         alert(response.data.message || 'Успешно импортировано!');
-        
+        onSuccess?.();
       }
     } catch (error: unknown) {      
       if (axios.isAxiosError(error)) {
@@ -45,10 +45,10 @@ export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewDat
       <Button 
         onClick={handleImport}
         disabled={previewData.length === 0 || loading} 
-        className="font-(--fontweight-regular) min-w-[150px]"
+        className="font-(--fontweight-regular) min-w-\[150px\]"
         isLoading= {loading}
         >
-  import
+  импортировать
          </Button>
   );
 };

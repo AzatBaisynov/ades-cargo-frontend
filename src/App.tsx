@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ImportChinaButton } from "./features/import-excel/ui/importchina-button";
 import {    previewData } from './features/import-excel/ui/mock.data';
 import { useAppSelector } from './app/store/hooks';
+import { ImportExcel } from './pages/ImportExcel';
 const App = () => {
 
   return (
@@ -12,6 +13,7 @@ const App = () => {
     <div className="excel-page">
   <ExcelUpload />
   <ExcelPreviewTable />
+  <ImportExcel />
    <ToastContainer
         position="top-right"
         autoClose={3000}
