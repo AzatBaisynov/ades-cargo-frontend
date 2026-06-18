@@ -42,13 +42,13 @@ export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewDat
   };
 
   return (
-      <Button 
+      <Button
         onClick={handleImport}
-        disabled={previewData.length === 0 || loading} 
-        className="font-(--fontweight-regular) min-w-\[150px\]"
-        isLoading= {loading}
-        >
-  импортировать
-         </Button>
+        disabled={previewData.length === 0 || loading}
+        className="font-normal min-w-150px"
+        isLoading={loading}
+      >
+        импортировать
+      </Button>
   );
 };
