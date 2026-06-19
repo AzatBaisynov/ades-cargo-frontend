@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Button } from './button';
 import { useState } from 'react';
+import { Button } from './ButtonUni';
 
 interface ImportChinaButtonProps {
   previewData: Array<{customer_code:string ,product_code:string}>

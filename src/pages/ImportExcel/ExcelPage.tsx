@@ -1,6 +1,6 @@
 import { ExcelPreviewTable } from "@/features/import-excel/ui/ExcelPreviewTable";
 import { ExcelUpload } from "@/features/import-excel/ui/ExcelUpload";
-import { ImportChinaButton } from "@/features/import-excel/ui/importchina-button";
+import { ImportChinaButton } from "@/features/import-excel/ui/Importchina-buttons";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "@/app/store/hooks";
