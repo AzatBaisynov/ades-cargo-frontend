@@ -7,7 +7,7 @@ interface ImportChinaButtonProps {
   
 }
 
-export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewData }) => {
+export const ImportChinaButton = ({ previewData }:ImportChinaButtonProps) => {
  const [loading ,setLoading] = useState(false)
   const handleImport = async () => {
     if (!previewData || previewData.length === 0) {
@@ -17,8 +17,7 @@ export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewDat
 
     try {
       setLoading(true)
-      const response = await axios.post(
-       'http://localhost:3000/product/import-china',previewData
+      const response = await axios.post(`${import.meta.env.BASE_URL}/product/import-china`, previewData
       );
 
       if (response.status === 200 || response.status === 201) {
@@ -45,10 +44,10 @@ export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewDat
       <Button 
         onClick={handleImport}
         disabled={previewData.length === 0 || loading} 
-        className="font-(--fontweight-regular) min-w-37.5"
+        className="font-(--fontweight-regular) min-w-37.5 absolute right-7"
         isLoading= {loading}
         >
-  import
-         </Button>
+        Импортировать
+      </Button>
   );
 };
