@@ -1,13 +1,12 @@
 import axios from 'axios';
-import { Button } from './button';
 import { useState } from 'react';
+import { Button } from './ButtonUni';
 
 interface ImportChinaButtonProps {
   previewData: Array<{ customer_code: string; product_code: string }>;
   onSuccess?: () => void;
 }
-
-export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewData, onSuccess }) => {
+export const ImportChinaButton = ({ previewData, onSuccess }: ImportChinaButtonProps) => {
   const [loading, setLoading] = useState(false);
 
   const handleImport = async () => {
@@ -17,10 +16,9 @@ export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewDat
     }
 
     try {
-      setLoading(true);
-      const response = await axios.post(
-        'http://localhost:3000/product/import-china',
-        previewData,
+      setLoading(true)
+      const response = await axios.post(`${import.meta.env.BASE_URL}/product/import-china`, previewData
+
       );
 
       if (response.status === 200 || response.status === 201) {
@@ -47,10 +45,10 @@ export const ImportChinaButton: React.FC<ImportChinaButtonProps> = ({ previewDat
       <Button 
         onClick={handleImport}
         disabled={previewData.length === 0 || loading} 
-        className="font-(--fontweight-regular) min-w-37.5"
+        className="font-(--fontweight-regular) min-w-37.5 absolute right-7"
         isLoading= {loading}
         >
-  import
-         </Button>
+        Импортировать
+      </Button>
   );
 };
