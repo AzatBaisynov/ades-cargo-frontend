@@ -1,20 +1,16 @@
 import { ExcelPreviewTable } from "@/features/import-excel/ui/ExcelPreviewTable";
 import { ExcelUpload } from "@/features/import-excel/ui/ExcelUpload";
-import { ImportChinaButton } from "@/features/import-excel/ui/importchina-button";
+import { ImportChinaButton } from "@/features/import-excel/ui/Importchina-buttons";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "@/app/store/hooks";
 
 const ExcelPage = () => {
   const previewData = useAppSelector((state) => state.excel.data);
-
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative mb-10">
       <ExcelUpload />
       <ExcelPreviewTable />
-
-      <ImportChinaButton previewData={previewData} />
-
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -24,6 +20,7 @@ const ExcelPage = () => {
         pauseOnHover
         draggable
       />
+      <ImportChinaButton previewData={previewData} />
     </div>
   );
 };

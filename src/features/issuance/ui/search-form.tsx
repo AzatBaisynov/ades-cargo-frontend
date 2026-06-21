@@ -5,8 +5,8 @@ interface SearchFormProps {
 loading:boolean
 }
 
-export const SearchForm: React.FC<SearchFormProps> = ({onSearch,loading}) => {
-    const [code,setCode] = useState('')
+export const SearchForm = ({onSearch,loading}:SearchFormProps) => {
+    const [code,setCode] = useState<string>('')
 
 const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,12 +27,11 @@ return (
         />
         </div>
         <button
-        type="submit"
-        disabled={loading|| !code.trim()}
-        className="px-6 py-2.5 font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all shadow-sm">
+            type="submit"
+            disabled={loading|| !code.trim()}
+            className="px-6 py-2.5 font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all shadow-sm">
            {loading? "Поиск...": "Найти"}
-            </button>
-
+        </button>
     </form>
 )
 }

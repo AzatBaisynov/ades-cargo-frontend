@@ -1,3 +1,3 @@
-export * from './item-list';
-export *from './search-form';
-export *from './summary-panel';
+export * from './ui/item-list';
+export * from './ui/search-form';
+export * from './ui/summary-panel';

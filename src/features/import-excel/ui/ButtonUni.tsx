@@ -5,7 +5,7 @@ interface ButtonProps  extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     isLoading?:boolean
    
 }
-export const Button : React.FC<ButtonProps> = ({isLoading,disabled, children,className='', ...props}) => {
+export const Button = ({isLoading,disabled, children,className='', ...props}:ButtonProps) => {
     return (
     <button
       disabled={disabled || isLoading}
