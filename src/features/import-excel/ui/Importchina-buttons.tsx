@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Button } from './ButtonUni';
 
 interface ImportChinaButtonProps {
-  previewData: Array<{customer_code:string ,product_code:string}>
-  
+  previewData: Array<{ customer_code: string; product_code: string }>;
+  onSuccess?: () => void;
 }
+export const ImportChinaButton = ({ previewData, onSuccess }: ImportChinaButtonProps) => {
+  const [loading, setLoading] = useState(false);
 
-export const ImportChinaButton = ({ previewData }:ImportChinaButtonProps) => {
- const [loading ,setLoading] = useState(false)
   const handleImport = async () => {
     if (!previewData || previewData.length === 0) {
       alert('Ошибка: Выберите файл для импорта!');
@@ -18,25 +18,26 @@ export const ImportChinaButton = ({ previewData }:ImportChinaButtonProps) => {
     try {
       setLoading(true)
       const response = await axios.post(`${import.meta.env.BASE_URL}/product/import-china`, previewData
+
       );
 
       if (response.status === 200 || response.status === 201) {
         alert(response.data.message || 'Успешно импортировано!');
-        
+        onSuccess?.();
       }
-    } catch (error: unknown) {      
+    } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const serverMessage = error.response?.data?.message;
-        const errorMessage = Array.isArray(serverMessage) 
-          ? serverMessage.join(', ') 
+        const errorMessage = Array.isArray(serverMessage)
+          ? serverMessage.join(', ')
           : serverMessage || 'Произошла ошибка при импорте';
 
         alert(`Ошибка сервера: ${errorMessage}`);
       } else {
         alert('Произошла непредвиденная ошибка клиента');
       }
-    } finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
