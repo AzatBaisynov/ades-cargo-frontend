@@ -34,6 +34,13 @@ const Header = () => {
         >
           Товары
         </Link>
+        <Link
+          to="/issuance"
+          className="transition opacity-80 hover:opacity-100"
+          style={{ fontSize: "var(--fs-base)" }}
+        >
+          Выдача
+        </Link>
       </nav>
     </header>
   );
