@@ -1,1 +1,1 @@
-export { ImportExcel } from './ImportExcel';
+export { ImportSuccessful } from "./ui/ImportSuccessful";
