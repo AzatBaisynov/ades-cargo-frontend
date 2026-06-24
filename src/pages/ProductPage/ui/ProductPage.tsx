@@ -35,13 +35,19 @@ const ProductsPage = () => {
     customerRef.current?.focus();
   };
 
+  const handleSave = () => {
+    console.log(rows);
+    // Здесь позже можно отправить данные на API
+    alert("Данные сохранены");
+  };
+
   return (
     <div className="p-6 font-[var(--font-main)]">
-     <h1 className="mb-6 text-center text-[2rem] font-[var(--font-weight-bold)] tracking-wide text-[var(--text-dark)]">
-  Приём товаров на склад
-</h1>
+      <h1 className="mb-6 text-center text-[2rem] font-[var(--font-weight-bold)] tracking-wide text-[var(--text-dark)]">
+        Приём товаров на склад
+      </h1>
 
-      <div className="mx-auto mb-6 flex max-w-4xl flex-wrap justify-center gap-3">
+      <div className="mx-auto mb-6 flex max-w-4xl gap-3">
         <input
           ref={customerRef}
           type="text"
@@ -53,7 +59,7 @@ const ProductsPage = () => {
               productRef.current?.focus();
             }
           }}
-          className="rounded-lg border border-[var(--text-light)] px-4 py-2 text-[var(--fs-base)] outline-none focus:border-[var(--bg-dark)]"
+          className="flex-1 rounded-lg border border-[var(--text-light)] px-4 py-2"
         />
 
         <input
@@ -67,73 +73,89 @@ const ProductsPage = () => {
               weightRef.current?.focus();
             }
           }}
-          className="rounded-lg border border-[var(--text-light)] px-4 py-2 text-[var(--fs-base)] outline-none focus:border-[var(--bg-dark)]"
+          className="flex-1 rounded-lg border border-[var(--text-light)] px-4 py-2"
         />
 
-        <input
-          ref={weightRef}
-          type="number"
-          placeholder="Вес, кг"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              addRow();
-            }
-          }}
-          className="rounded-lg border border-[var(--text-light)] px-4 py-2 text-[var(--fs-base)] outline-none focus:border-[var(--bg-dark)]"
-        />
+    <input
+  ref={weightRef}
+  type="text"
+  inputMode="decimal"
+  placeholder="Вес, кг"
+  value={weight}
+  onChange={(e) => {
+    const value = e.target.value.replace(/[^0-9.,]/g, "");
+    setWeight(value);
+  }}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      addRow();
+    }
+  }}
+  className="flex-1 rounded-lg border border-[var(--text-light)] px-4 py-2"
+/>
 
         <button
           onClick={addRow}
-          className="rounded-lg bg-[var(--bg-dark)] px-5 py-2 text-white transition-opacity hover:opacity-90"
+          className="rounded-lg bg-[var(--bg-dark)] px-5 py-2 text-white"
         >
           Добавить
         </button>
       </div>
 
-      <div className="mx-auto max-w-4xl overflow-hidden rounded-xl border border-[var(--text-light)]">
-  <table className="w-full border-collapse text-center">
-   <thead className="bg-[var(--bg-light)]">
-  <tr>
-    <th className="border border-[var(--text-light)] p-3 text-center">
-      №
-    </th>
-    <th className="border border-[var(--text-light)] p-3 text-center">
-      Код клиента
-    </th>
-    <th className="border border-[var(--text-light)] p-3 text-center">
-      Код товара
-    </th>
-    <th className="border border-[var(--text-light)] p-3 text-center">
-      Вес, кг
-    </th>
-  </tr>
-</thead>
+      <div className="mx-auto max-w-4xl">
+        <div className="overflow-hidden rounded-xl border border-[var(--text-light)]">
+          <table className="w-full border-collapse text-center">
+            <thead className="bg-[var(--bg-light)]">
+              <tr>
+                <th className="border border-[var(--text-light)] p-3">
+                  №
+                </th>
+                <th className="border border-[var(--text-light)] p-3">
+                  Код клиента
+                </th>
+                <th className="border border-[var(--text-light)] p-3">
+                  Код товара
+                </th>
+                <th className="border border-[var(--text-light)] p-3">
+                  Вес, кг
+                </th>
+              </tr>
+            </thead>
 
-  <tbody>
-  {rows.map((row, index) => (
-    <tr key={index}>
-      <td className="border border-[var(--text-light)] p-3 text-center">
-        {index + 1}
-      </td>
+            <tbody>
+              {rows.map((row, index) => (
+                <tr key={index}>
+                  <td className="border border-[var(--text-light)] p-3">
+                    {index + 1}
+                  </td>
 
-      <td className="border border-[var(--text-light)] p-3">
-        {row.customerCode}
-      </td>
+                  <td className="border border-[var(--text-light)] p-3">
+                    {row.customerCode}
+                  </td>
 
-      <td className="border border-[var(--text-light)] p-3">
-        {row.productCode}
-      </td>
+                  <td className="border border-[var(--text-light)] p-3">
+                    {row.productCode}
+                  </td>
 
-      <td className="border border-[var(--text-light)] p-3">
-        {row.weight}
-      </td>
-    </tr>
-  ))}
-</tbody>
-  </table>
-</div>
+                  <td className="border border-[var(--text-light)] p-3">
+                    {row.weight}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-4 flex justify-end">
+          <button
+            onClick={handleSave}
+            disabled={!rows.length}
+            className="rounded-lg bg-[var(--bg-dark)] px-5 py-2 text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Сохранить
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

@@ -18,7 +18,13 @@ const initialState: ExcelState = {
 const excelSlice = createSlice({
   name: 'excel',
   initialState,
-  reducers: {},
+  reducers: {
+    clearExcelData: (state) => {
+      state.data = [];
+      state.success = false;
+      state.message = '';
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(uploadExcel.pending, (state) => {
@@ -27,18 +33,19 @@ const excelSlice = createSlice({
         state.message = '';
       })
 
-.addCase(uploadExcel.fulfilled, (state, action) => {
-  state.loading = false;
-  state.success = true;
-  state.data = action.payload?.data ?? action.payload ?? [];
-})
+      .addCase(uploadExcel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.data = action.payload?.data ?? action.payload ?? [];
+      })
 
-.addCase(uploadExcel.rejected, (state) => {
-  state.loading = false;
-  state.success = false;
-  state.data = [];
-})
+      .addCase(uploadExcel.rejected, (state) => {
+        state.loading = false;
+        state.success = false;
+        state.data = [];
+      });
   },
 });
 
+export const { clearExcelData } = excelSlice.actions;
 export default excelSlice.reducer;
