@@ -1,1 +1,1 @@
-export {default as IssuePage} from './Issuance'
+export {default as IssuePage} from './ui/Issuance'

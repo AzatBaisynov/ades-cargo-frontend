@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { ItemList, SummaryPanel } from '@/features/issuance';
-import { SearchForm } from '@/features/issuance';
+import { ItemList } from '@/widgets/issuance-panel/ui/Item-list';
+import { SummaryPanel } from '@/widgets/issuance-panel/ui/Summary-panel';
+import { SearchForm } from '@/widgets/issuance-panel/ui/Search-form';
 import { useState } from 'react';
 
 interface Product {
@@ -16,7 +17,7 @@ export const IssuePage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const BASE_URL=import.meta.env.BASE_URL
+  const BASE_URL=import.meta.env.VITE_BASE_URL
   
 const handleSearch = async (customer_code: string) => {
     setProducts([])

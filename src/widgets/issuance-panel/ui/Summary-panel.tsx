@@ -1,4 +1,4 @@
-import { Button } from "../../import-excel/ui/ButtonUni"
+import { Button } from "../../../features/import-excel/ui/ButtonUni"
 
 interface SummaryPanelProps{
     totalCount:number 

@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
-import MainLayout from "@/layouts/MainLayout";
-import ExcelPage from "@/pages/ImportExcel/ExcelPage";
-import ProductPage from "@/pages/ProductPage/ProductPage";
-import { IssuePage } from "./pages/Issuance";
+import MainLayout from "@/widgets/layout/ui/MainLayout";
+import ExcelPage from "@/pages/ImportExcel/ui/ExcelPage";
+import ProductPage from "@/pages/ProductPage/ui/ProductPage";
+import { IssuePage } from "@/pages/Issuance/ui/Issuance";
 
 const App = () => {
   return (

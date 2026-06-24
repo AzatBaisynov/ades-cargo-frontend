@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Header from "@/features/import-excel/ui/Header";
+import Header from "@/widgets/header/ui/Header";
 
 const MainLayout = () => {
   return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ExcelPreviewTable } from "@/features/import-excel/ui/ExcelPreviewTable";
-import { ExcelUpload } from "@/features/import-excel/ui/ExcelUpload";
+import { ExcelPreviewTable } from "@/widgets/excel-import/ui/ExcelPreviewTable";
+import { ExcelUpload } from "@/widgets/excel-import/ui/ExcelUpload";
 import { ImportChinaButton } from "@/features/import-excel/ui/Importchina-buttons";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
