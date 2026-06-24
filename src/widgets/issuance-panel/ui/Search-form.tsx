@@ -28,7 +28,7 @@ return (
             type="submit"
             disabled={loading|| !code.trim()}
             className="px-6 py-2.5 font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all shadow-sm">
-           Search
+           Найти
         </button>
     </form>
 )
