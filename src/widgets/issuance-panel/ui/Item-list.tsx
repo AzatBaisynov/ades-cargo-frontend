@@ -9,11 +9,7 @@ interface Product{
 interface ItemListProps{products:Product[]}
 export const ItemList  = ({products}:ItemListProps) => {
     if (products.length === 0){
-        return(
-            <div className="p-8 text-center bg-gray-50 rounded-xl border border-dashed border-gray-300 text-(--text-dark)">
-                Товары не найдены. Введите код клиента для поиска.
-            </div>
-        )
+         return[]
     }
         return (
         <div className="w-full overflow-hidden bg-(--bg-dark) rounded-xl border border-gray-200 shadow-sm mb-6">
