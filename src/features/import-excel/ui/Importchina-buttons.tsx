@@ -22,7 +22,6 @@ export const ImportChinaButton = ({ previewData, onSuccess }: ImportChinaButtonP
       );
 
       if (response.status === 200 || response.status === 201) {
-        alert(response.data.message || 'Успешно импортировано!');
         onSuccess?.();
       }
     } catch (error: unknown) {
