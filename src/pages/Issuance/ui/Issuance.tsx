@@ -4,6 +4,7 @@ import { SummaryPanel } from '@/widgets/issuance-panel/ui/Summary-panel';
 import { SearchForm } from '@/widgets/issuance-panel/ui/Search-form';
 import { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
+import { Search } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -23,32 +24,38 @@ export const IssuePage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [searchCode,setSearchCode] = useState<string>('')
-  const BASE_URL=import.meta.env.VITE_BASE_URL
-  
-const handleSearch = async (customer_code: string) => {
-    setProducts([])
+  const [searchCode, setSearchCode] = useState<string>('');
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+  const handleSearch = async (customer_code: string) => {
+    setProducts([]);
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${BASE_URL}/product/search/${customer_code}`);
+      const response = await axios.get(
+        `${BASE_URL}/product/search/${customer_code}`,
+      );
       setProducts(response.data);
     } catch (err) {
-      if( axios.isAxiosError<NestApiError>(err) && err.response?.data){
-        const backendMessage = err.response.data.message
+      if (axios.isAxiosError<NestApiError>(err) && err.response?.data) {
+        const backendMessage = err.response.data.message;
 
-        if(Array.isArray(backendMessage)){
-          setError(backendMessage.join(', '))
-        }else{
-          setError(backendMessage|| 'Произошла непредвиденная ошибка на сервере.')
+        if (Array.isArray(backendMessage)) {
+          setError(backendMessage.join(', '));
+        } else {
+          setError(
+            backendMessage || 'Произошла непредвиденная ошибка на сервере.',
+          );
         }
-      } else{
-        setError('Не удалось связаться с сервером. Проверьте подключение к сети.')
+      } else {
+        setError(
+          'Не удалось связаться с сервером. Проверьте подключение к сети.',
+        );
       }
     } finally {
       setLoading(false);
     }
-}
+  };
   const handleGiveOutProducts = async () => {
     if (products.length === 0) return;
     setSubmitting(true);
@@ -56,52 +63,78 @@ const handleSearch = async (customer_code: string) => {
     try {
       const productIds = products.map((p) => p.id);
       await axios.patch(`${BASE_URL}/product/status`, {
-        product_code: productIds, 
-        status: 'Выдан', 
+        product_code: productIds,
+        status: 'Выдан',
       });
-      toast.success(`Успешно выдано товаров: ${products.length} шт.`)
-         setProducts([]);
-         setSearchCode('')
+      toast.success(`Успешно выдано товаров: ${products.length} шт.`);
+      setProducts([]);
+      setSearchCode('');
     } catch (err) {
-      if(axios.isAxiosError<NestApiError>(err) && err.response?.data.message){
-        const backendMassage = err.response.data.message
-        if(Array.isArray(backendMassage)){
-          setError(backendMassage.join(', '))
-        }else{
-        setError(backendMassage)}
-      }else {
-      setError('Не удалось обновить статус товаров.');
-    }} finally {
+      if (axios.isAxiosError<NestApiError>(err) && err.response?.data.message) {
+        const backendMessage = err.response.data.message;
+        if (Array.isArray(backendMessage)) {
+          setError(backendMessage.join(', '));
+        } else {
+          setError(backendMessage);
+        }
+      } else {
+        setError('Не удалось обновить статус товаров.');
+      }
+    } finally {
       setSubmitting(false);
     }
   };
-
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <Toaster 
-      position="top-right"
-      toastOptions={{
-        success: {
-          duration: 4000,
-        }}}
-      />
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Выдача товаров со склада</h1>
-      <SearchForm onSearch={handleSearch} loading={loading} code={searchCode} setCode={setSearchCode} />
-      {error && (
-        <div className="mb-4 p-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
-          {error}
-        </div>
-      )}
-      <ItemList products={products} />
-      {products.length > 0 && (
-        <SummaryPanel
-          totalCount={products.length}
-          onIssue={handleGiveOutProducts}
-          submitting={submitting}
+    <div className="space-y-6">
+      <div className="mb-6">
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            success: {
+              duration: 4000,
+            },
+          }}
         />
-      )}
+        <h2 className="text-2xl font-bold text-gray-800">Поиск и выдача</h2>
+        <p className="text-gray-500 mt-1">Найдите товар и выдайте клиенту</p>
+      </div>
+      <div className="bg-(--bg-darck) rounded-2xl border border-gray-200 shadow-sm p-6">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 bg-linear-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center shadow-md shadow-green-500/20">
+            <Search className="w-5 h-5 text-white" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-700">Поиск товара</h3>
+        </div>
+        <div className="flex gap-4">
+          <div className="flex-1 relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <SearchForm
+              onSearch={handleSearch}
+              loading={loading}
+              code={searchCode}
+              setCode={setSearchCode}
+            />
+          </div>
+        </div>
+        {error && (
+          <div className="mb-4 p-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
+            {error}
+          </div>
+        )}
+        <ItemList
+          key={products.map((p) => p.id).join(',')}
+          products={products}
+        />
+        {products.length > 0 && (
+          <SummaryPanel
+            totalCount={products.length}
+            onIssue={handleGiveOutProducts}
+            submitting={submitting}
+          />
+        )}
+      </div>
     </div>
   );
-}
+};
 
-export default IssuePage
+export default IssuePage;
