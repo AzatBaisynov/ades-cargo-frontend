@@ -85,7 +85,7 @@ const handleSearch = async (customer_code: string) => {
           duration: 4000,
         }}}
       />
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Выдача товаров со склада</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">Выдача товаров со склада</h1>
       <SearchForm onSearch={handleSearch} loading={loading} code={searchCode} setCode={setSearchCode} />
       {error && (
         <div className="mb-4 p-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
