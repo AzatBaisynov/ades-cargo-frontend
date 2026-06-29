@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# 📦 Fullstack Cargo Management System (Китай — Бишкек)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Профессиональное Fullstack-приложение для автоматизации логистических процессов карго-компании. Система полностью сопровождает груз: от приемки на складе в Китае до выдачи клиенту в Бишкеке.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📝 Описание бизнес-логики (Бизнес-процесс)
 
-## React Compiler
+Приложение разделено на 3 ключевых этапа (страницы), соответствующих жизненному циклу груза:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **🇨🇳 Этап 1: Приемка в Китае (Импорт данных)**
+   - **Что делает:** Первая страница отвечает за загрузку информации о товарах, поступивших на склад в Китае.
+   - **Как работает:** Менеджер загружает `Excel-файл (.xlsx / .xls)` с детальной информацией о позициях. Система парсит файл и автоматически сохраняет данные в базу данных, присваивая товарам начальный статус (например, `На складе в Китае`).
 
-## Expanding the ESLint configuration
+2. **🇰🇬 Этап 2: Склад в Бишкеке (Прибытие груза)**
+   - **Что делает:** Вторая страница фиксирует прибытие товаров в точку назначения.
+   - **Как работает:** Когда машина/самолет приезжает, сотрудники склада в Бишкеке отмечают прибывшие товары (поиск по трек-номерам, кодам или ID). Статус товаров в базе данных обновляется на `Прибыло в Бишкек / Готово к выдаче`.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+3. **🤝 Этап 3: Выдача клиентам (Финал)**
+   - **Что делает:** Третья страница отвечает за непосредственную передачу посылок клиентам.
+   - **Как работает:** Клиент приходит забирать груз. Менеджер находит его товары в системе, проверяет готовность, списывает их со склада и отмечает как `Выдано`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Слой (Layer) | Технологии
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| :--- | :--- |
+| **Frontend** | React.js, Vite, TypeScript, JavaScript |
+| **Backend** | NestJS, Node.js, TypeScript |
+| **Инструменты**| Git, Jira, DB |
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Проект разделен на две основные директории: `/frontend` и `/backend` (https://github.com/AzatBaisynov/ades-cargo-backend)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚙️ Требования (Prerequisites)
+
+Перед началом работы убедитесь, что у вас установлены:
+
+- **Node.js** (рекомендуемая версия LTS, например, v20+)
+- **npm** (идет в комплекте с Node.js)
+- **postgressql** (https://www.postgresql.org/download)
+
+---
+
+## Установка
+
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/AzatBaisynov/ades-cargo-frontend.git
+
+1.1 Перейдите в вашу репозиторий
+cd ваш репозиторий
+
+2.Установите зависимости
+```bash
+npm i
+
+Создайте файл .env в корне папки frontend и укажите необходимые переменные окружения (например, порт VITE*BASE_URL=тут*укажи*адрес*бекенда)
+
+3.Установите необходимые библиотеки:
+например:
+npm i : react-router-dom, tailwind ,axois ,react-redux
+
+4.Запуск приложения:
+
+# Режим разработки
+
+npm run dev
+🌐 Фронтенд запустится на: (обычно http://localhost:5173).
+
+# Сборка проекта
+
+npm run build
