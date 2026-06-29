@@ -6,6 +6,7 @@ import { Toaster, toast } from "react-hot-toast";
 import type { Product } from "@/shared/product.interface";
 import { getErrorMessage } from "@/shared/api/axios";
 import { api } from "@/shared/api/endpoints";
+import { Search } from "lucide-react";
 
 export const IssuePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -52,34 +53,44 @@ export const IssuePage = () => {
       setSubmitting(false);
     }
   };
-
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          success: {
-            duration: 4000,
-          },
-        }}
-      />
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">
-        Выдача товаров со склада
-      </h1>
-      <SearchForm
-        onSearch={handleSearch}
-        loading={loading}
-        code={searchCode}
-        setCode={setSearchCode}
-      />
-      <ItemList products={products} />
-      {products.length > 0 && (
-        <SummaryPanel
-          totalCount={products.length}
-          onIssue={handleGiveOutProducts}
-          submitting={submitting}
+    <div className="space-y-6">
+      <div className="mb-6">
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            success: {
+              duration: 4000,
+            },
+          }}
         />
-      )}
+        <h2 className="text-2xl font-bold text-gray-800">Поиск и выдача</h2>
+        <p className="text-gray-500 mt-1">Найдите товар и выдайте клиенту</p>
+      </div>
+      <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
+        <div className="flex gap-4">
+          <div className="flex-1 relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <SearchForm
+              onSearch={handleSearch}
+              loading={loading}
+              code={searchCode}
+              setCode={setSearchCode}
+            />
+          </div>
+        </div>
+        <ItemList
+          key={products.map((p) => p.id).join(",")}
+          products={products}
+        />
+        {products.length > 0 && (
+          <SummaryPanel
+            totalCount={products.length}
+            onIssue={handleGiveOutProducts}
+            submitting={submitting}
+          />
+        )}
+      </div>
     </div>
   );
 };
