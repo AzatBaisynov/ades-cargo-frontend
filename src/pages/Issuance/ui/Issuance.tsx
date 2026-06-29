@@ -54,6 +54,19 @@ export const IssuePage = () => {
     }
   };
   return (
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <Toaster 
+      position="top-right"
+      toastOptions={{
+        success: {
+          duration: 4000,
+        }}}
+      />
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">Выдача товаров со склада</h1>
+      <SearchForm onSearch={handleSearch} loading={loading} code={searchCode} setCode={setSearchCode} />
+      {error && (
+        <div className="mb-4 p-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
+          {error}
     <div className="space-y-6">
       <div className="mb-6">
         <Toaster

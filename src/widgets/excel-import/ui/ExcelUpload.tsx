@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useAppDispatch } from "@/app/store/hooks";
 import { uploadExcel } from "../../../features/import-excel/model/excelThunk";
 import { toast } from "react-toastify";
+import { Upload } from "lucide-react";
 
 interface Props {
   isUploaded: boolean;
@@ -52,9 +53,14 @@ export const ExcelUpload = ({ isUploaded, setIsUploaded }: Props) => {
     }
   };
 
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
+ const handleClick = () => {
+  if (isUploaded) {
+    toast.warning("Файл уже загружен");
+    return;
+  }
+
+  inputRef.current?.click();
+};
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -71,50 +77,65 @@ export const ExcelUpload = ({ isUploaded, setIsUploaded }: Props) => {
 
   return (
     <div className="mt-10 flex justify-center">
-      <div
-        className={`flex min-h-[220px] w-full max-w-[1200px] flex-col items-center justify-center rounded-xl border-2 border-dashed bg-[var(--bg-light)] text-[var(--text-dark)] transition-all duration-200
-        ${
-          isUploaded
-            ? "cursor-not-allowed opacity-60"
-            : isDragging
-            ? "cursor-pointer border-[var(--bg-dark)] shadow-md"
-            : "cursor-pointer border-gray-300 hover:-translate-y-[1px] hover:border-[var(--bg-dark)]"
-        }`}
-        onClick={() => {
-          if (isUploaded) {
-            toast.warning("Файл уже загружен");
-            return;
-          }
-          handleClick();
-        }}
-        onDragOver={(e) => {
-          if (isUploaded) return;
-          e.preventDefault();
-          setIsDragging(true);
-        }}
-        onDragLeave={() => setIsDragging(false)}
-        onDrop={(e) => {
-          if (isUploaded) {
-            toast.warning("Файл уже загружен");
-            return;
-          }
-          handleDrop(e);
-        }}
-      >
-        <input
-          ref={inputRef}
-          type="file"
-          accept=".xls,.xlsx"
-          onChange={handleChange}
-          hidden
-        />
+  <div className="w-full max-w-[1100px] rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+  <div className="mb-4 flex items-center justify-between">
+    <h3 className="text-lg font-semibold text-gray-700">
+      Загрузка файла
+    </h3>
+  </div>
 
-        <div className="mb-2 text-3xl text-[var(--bg-dark)]">⬆</div>
+ <div
+  className={`flex items-center justify-center gap-3 rounded-xl border-2 border-dashed p-8 transition-all ${
+    isUploaded
+      ? "cursor-not-allowed opacity-60 border-gray-200"
+      : isDragging
+      ? "border-green-500 bg-green-50"
+      : "border-gray-300 hover:border-green-400 hover:bg-green-50/50"
+  }`}
+  onClick={() => {
+    if (isUploaded) {
+      toast.warning("Файл уже загружен");
+      return;
+    }
+    handleClick();
+  }}
+  onDragOver={(e) => {
+    if (isUploaded) return;
+    e.preventDefault();
+    setIsDragging(true);
+  }}
+  onDragLeave={() => setIsDragging(false)}
+  onDrop={(e) => {
+    if (isUploaded) {
+      toast.warning("Файл уже загружен");
+      return;
+    }
+    handleDrop(e);
+  }}
+>
+  <input
+  ref={inputRef}
+  type="file"
+  accept=".xls,.xlsx"
+  onChange={handleChange}
+  hidden
+/>
 
-        <p className="mt-2 text-sm text-[var(--text-dark)]">
-          Перетащите файл excel или нажмите для выбора
-        </p>
-      </div>
+    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100">
+      <Upload className="h-6 w-6 text-green-600" />
+    </div>
+
+    <div>
+      <p className="font-medium text-gray-700">
+        Выберите Excel файл
+      </p>
+
+      <p className="text-sm text-gray-400">
+        или перетащите сюда
+      </p>
+    </div>
+  </div>
+</div>
     </div>
   );
 };

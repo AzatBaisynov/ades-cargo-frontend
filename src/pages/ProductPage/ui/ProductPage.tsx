@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { QrCode, Plus } from "lucide-react";
 
 interface TableRow {
   customerCode: string;
@@ -21,11 +22,7 @@ const ProductsPage = () => {
 
     setRows((prev) => [
       ...prev,
-      {
-        customerCode,
-        productCode,
-        weight,
-      },
+      { customerCode, productCode, weight },
     ]);
 
     setCustomerCode("");
@@ -36,126 +33,150 @@ const ProductsPage = () => {
   };
 
   const handleSave = () => {
-    console.log(rows);
-    // Здесь позже можно отправить данные на API
     alert("Данные сохранены");
   };
 
   return (
-    <div className="p-6 font-[var(--font-main)]">
-      <h1 className="mb-6 text-center text-[2rem] font-[var(--font-weight-bold)] tracking-wide text-[var(--text-dark)]">
-        Приём товаров на склад
-      </h1>
-
-      <div className="mx-auto mb-6 flex max-w-4xl gap-3">
-        <input
-          ref={customerRef}
-          type="text"
-          placeholder="Код клиента"
-          value={customerCode}
-          onChange={(e) => setCustomerCode(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              productRef.current?.focus();
-            }
-          }}
-          className="flex-1 rounded-lg border border-[var(--text-light)] px-4 py-2"
-        />
-
-        <input
-          ref={productRef}
-          type="text"
-          placeholder="Код товара"
-          value={productCode}
-          onChange={(e) => setProductCode(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              weightRef.current?.focus();
-            }
-          }}
-          className="flex-1 rounded-lg border border-[var(--text-light)] px-4 py-2"
-        />
-
-    <input
-  ref={weightRef}
-  type="text"
-  inputMode="decimal"
-  placeholder="Вес, кг"
-  value={weight}
-  onChange={(e) => {
-    const value = e.target.value.replace(/[^0-9.,]/g, "");
-    setWeight(value);
-  }}
-  onKeyDown={(e) => {
-    if (e.key === "Enter") {
-      addRow();
-    }
-  }}
-  className="flex-1 rounded-lg border border-[var(--text-light)] px-4 py-2"
-/>
-
-        <button
-          onClick={addRow}
-          className="rounded-lg bg-[var(--bg-dark)] px-5 py-2 text-white"
-        >
-          Добавить
-        </button>
+    <div className="space-y-6">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">
+          Приёмка товара
+        </h2>
+        <p className="mt-1 text-gray-500">
+          Отсканируйте штрих-код и введите данные
+        </p>
       </div>
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
 
-      <div className="mx-auto max-w-4xl">
-        <div className="overflow-hidden rounded-xl border border-[var(--text-light)]">
-          <table className="w-full border-collapse text-center">
-            <thead className="bg-[var(--bg-light)]">
-              <tr>
-                <th className="border border-[var(--text-light)] p-3">
-                  №
-                </th>
-                <th className="border border-[var(--text-light)] p-3">
-                  Код клиента
-                </th>
-                <th className="border border-[var(--text-light)] p-3">
-                  Код товара
-                </th>
-                <th className="border border-[var(--text-light)] p-3">
-                  Вес, кг
-                </th>
-              </tr>
-            </thead>
+        <div className="mb-6 flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 shadow-md shadow-green-500/20">
+            <QrCode className="h-5 w-5 text-white" />
+          </div>
 
-            <tbody>
-              {rows.map((row, index) => (
-                <tr key={index}>
-                  <td className="border border-[var(--text-light)] p-3">
-                    {index + 1}
-                  </td>
+          <h3 className="text-lg font-semibold text-gray-700">
+            Новый товар
+          </h3>
+        </div>
 
-                  <td className="border border-[var(--text-light)] p-3">
-                    {row.customerCode}
-                  </td>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
 
-                  <td className="border border-[var(--text-light)] p-3">
-                    {row.productCode}
-                  </td>
+          <input
+            ref={customerRef}
+            type="text"
+            placeholder="Код клиента"
+            value={customerCode}
+            onChange={(e) => setCustomerCode(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") productRef.current?.focus();
+            }}
+            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 placeholder:text-gray-400 focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+          />
 
-                  <td className="border border-[var(--text-light)] p-3">
-                    {row.weight}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <input
+            ref={productRef}
+            type="text"
+            placeholder="Код товара"
+            value={productCode}
+            onChange={(e) => setProductCode(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") weightRef.current?.focus();
+            }}
+            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 placeholder:text-gray-400 focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+          />
+
+          <input
+            ref={weightRef}
+            type="text"
+            inputMode="decimal"
+            placeholder="Вес, кг"
+            value={weight}
+            onChange={(e) => {
+              const value = e.target.value.replace(/[^0-9.,]/g, "");
+              setWeight(value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") addRow();
+            }}
+            className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-800 placeholder:text-gray-400 focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+          />
+
         </div>
 
         <div className="mt-4 flex justify-end">
           <button
-            onClick={handleSave}
-            disabled={!rows.length}
-            className="rounded-lg bg-[var(--bg-dark)] px-5 py-2 text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+            onClick={addRow}
+            className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-3 text-sm font-medium text-white shadow-md shadow-green-500/25 transition-all hover:from-green-600 hover:to-emerald-600"
           >
-            Сохранить
+            <Plus className="h-5 w-5" />
+            Добавить товар
           </button>
         </div>
       </div>
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+
+        <div className="border-b border-gray-100 p-4 flex items-center justify-between">
+  <h3 className="text-lg font-semibold text-gray-700">
+    Недавно добавленные
+  </h3>
+         <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+  {rows.length} товаров
+</span>
+        </div>
+
+        <table className="w-full text-center">
+
+          <thead>
+            <tr className="bg-gray-50">
+              <th className="px-4 py-3 text-xs font-medium uppercase tracking-wider text-gray-500">
+                №
+              </th>
+              <th className="px-4 py-3 text-xs font-medium uppercase tracking-wider text-gray-500">
+                Код клиента
+              </th>
+              <th className="px-4 py-3 text-xs font-medium uppercase tracking-wider text-gray-500">
+                Код товара
+              </th>
+              <th className="px-4 py-3 text-xs font-medium uppercase tracking-wider text-gray-500">
+                Вес, кг
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {rows.map((row, index) => (
+              <tr
+                key={index}
+                className="hover:bg-gray-50 transition-colors"
+              >
+                <td className="px-4 py-3 text-sm text-gray-700">
+                  {index + 1}
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-700">
+                  {row.customerCode}
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-700">
+                  {row.productCode}
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-700">
+                  {row.weight}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+
+        </table>
+
+      </div>
+      <div className="flex justify-end">
+        <button
+          onClick={handleSave}
+          disabled={!rows.length}
+          className="rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-3 text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Сохранить
+        </button>
+      </div>
+
     </div>
   );
 };

@@ -13,11 +13,16 @@ export const ExcelPreviewTable = () => {
           </div>
         ) : (
           <>
-            <div className="mb-4">
-              <h2>Предпросмотр содержимого</h2>
-            </div>
+            <div className="flex items-center justify-between border-b border-gray-100 p-4">
+  <h3 className="text-lg font-semibold text-gray-700">
+    Предпросмотр
+    <span className="ml-2 text-sm font-normal text-gray-400">
+      ({data.length} записей)
+    </span>
+  </h3>
+</div>
 
-            <div className="overflow-hidden rounded-[14px] border-2 border-gray-200 bg-[var(--bg-light)] shadow-md">
+            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
   <div className="custom-scrollbar max-h-[420px] overflow-auto">
     <table className="w-full table-fixed border-separate border-spacing-0">
       <thead>
@@ -25,7 +30,7 @@ export const ExcelPreviewTable = () => {
     {Object.keys(data[0]).map((key) => (
       <th
         key={key}
-        className="sticky top-0 z-10 border-b-2 border-gray-200 bg-[var(--bg-light)] px-4 py-3 text-xs font-bold uppercase tracking-wider text-[var(--text-dark)]"
+       className="sticky top-0 z-10 bg-gray-50 px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
       >
         {columnLabels[key] ?? key}
       </th>
@@ -42,7 +47,7 @@ export const ExcelPreviewTable = () => {
       {Object.keys(row).map((key) => (
         <td
           key={key}
-          className="border-b border-gray-100 px-4 py-3 text-[var(--text-dark)]"
+          className="px-4 py-3 text-sm text-gray-600"
         >
           {String(row[key] ?? '')}
         </td>
@@ -53,11 +58,9 @@ export const ExcelPreviewTable = () => {
     </table>
   </div>
 
-  <div className="flex justify-between border-t-2 border-gray-200 bg-[var(--bg-light)] px-4 py-2 text-xs text-[var(--text-dark)]">
-    <span>
-      Всего строк: <b>{data.length}</b>
-    </span>
-  </div>
+ <div className="bg-gray-50 px-4 py-3 text-center text-sm text-gray-500">
+  Всего строк: {data.length}
+</div>
 </div>
           </>
         )}

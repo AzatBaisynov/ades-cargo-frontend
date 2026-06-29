@@ -1,19 +1,23 @@
 :root {
-/* Font Family */
---font-main: 'Rubik', helvetica, sans-serif, arial;
-/* Шрифты */
---fs-base: 0.875rem;
---fs-sm: 0.8125rem;
---fs-xs: 0.75rem;
---fs-lg: 1.25rem;
---fs-xl: 1.5rem;
-/* Жирность текста */
---font-weight-bold: 700;
---font-weight-regular: 400;
-/* Цвет фона */
---bg-dark: oklch(52.7% 0.154 150.069);
---bg-light: oklch(89.7% 0.196 126.665);
-/* Цвет текста */
---text-dark: oklch(15.3% 0.006 107.1);
---text-light: oklch(73.7% 0.021 106.9);
+  /* Семейство шрифтов */
+  --font-main: 'Rubik', helvetica, arial, sans-serif;
+
+  /* Размер шрифтов */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.5rem;
+
+  /* Жирность текста */
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  /* Цвет фона */
+  --bg-dark: #16a34a;   /* green-600 */
+  --bg-light: #f9fafb;  /* gray-50 */
+
+  /* Цвет текста */
+  --text-dark: #111827; /* gray-900 */
+  --text-light: #6b7280; /* gray-500 */
 }

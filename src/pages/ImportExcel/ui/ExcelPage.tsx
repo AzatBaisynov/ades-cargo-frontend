@@ -17,8 +17,22 @@ const ExcelPage = () => {
   const [successOpen, setSuccessOpen] = useState(false);
 
   return (
-    <div className="space-y-4 relative mb-10">
-      <ExcelUpload isUploaded={isUploaded} setIsUploaded={setIsUploaded} />
+    <div className="mb-10 space-y-8">
+     <div className="mx-auto w-full max-w-[1100px]">
+  <h2 className="text-2xl font-bold text-gray-800">
+    Импорт данных
+  </h2>
+
+  <p className="mt-1 text-gray-500">
+    Загрузите Excel файл с товарами
+  </p>
+</div>
+
+      <ExcelUpload
+        isUploaded={isUploaded}
+        setIsUploaded={setIsUploaded}
+      />
+
       <ExcelPreviewTable />
 
       <ToastContainer
@@ -30,15 +44,20 @@ const ExcelPage = () => {
         pauseOnHover
         draggable
       />
-        <ImportChinaButton
+
+      <ImportChinaButton
         previewData={previewData}
         onSuccess={() => {
           setSuccessOpen(true);
           dispatch(clearExcelData());
-          setIsUploaded(false); 
+          setIsUploaded(false);
         }}
       />
-      <ImportSuccessful isOpen={successOpen} onSuccess={() => setSuccessOpen(false)} />
+
+      <ImportSuccessful
+        isOpen={successOpen}
+        onSuccess={() => setSuccessOpen(false)}
+      />
     </div>
   );
 };
