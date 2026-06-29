@@ -1,13 +1,6 @@
-import { Package, User } from 'lucide-react';
-import { useState } from 'react';
-
-interface Product {
-  id: string;
-  customer_code: string;
-  product_code: string;
-  status: string;
-  createdAt: string;
-}
+import type { Product } from "@/shared/product.interface";
+import { Package, User } from "lucide-react";
+import { useState } from "react";
 
 interface ItemListProps {
   products: Product[];
@@ -31,7 +24,7 @@ export const ItemList = ({ products }: ItemListProps) => {
         {products.map((product) => (
           <div
             key={product.id}
-            className={`bg-gray-50 rounded-xl p-4 border-2 transition-all cursor-pointer ${selectedItem?.id === product.id ? 'border-green-400 ring-2 ring-green-100' : 'border-transparent hover:border-gray-200'}`}
+            className={`bg-gray-50 rounded-xl p-4 border-2 transition-all cursor-pointer ${selectedItem?.id === product.id ? "border-green-400 ring-2 ring-green-100" : "border-transparent hover:border-gray-200"}`}
             onClick={() =>
               setSelectedItem(selectedItem?.id === product.id ? null : product)
             }
@@ -41,14 +34,14 @@ export const ItemList = ({ products }: ItemListProps) => {
                 <div className="flex items-center gap-3">
                   <div
                     className={`px-3 py-1 rounded-lg text-xs font-medium ${
-                      product.status === 'Прибыл в Бишкек'
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-gray-200 text-gray-500'
+                      product.status === "Прибыл в Бишкек"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-gray-200 text-gray-500"
                     }`}
                   >
-                    {product.status === 'Прибыл в Бишкек'
-                      ? 'Прибыл в Бишкек'
-                      : 'Выдан'}
+                    {product.status === "Прибыл в Бишкек"
+                      ? "Прибыл в Бишкек"
+                      : "Выдан"}
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-6">

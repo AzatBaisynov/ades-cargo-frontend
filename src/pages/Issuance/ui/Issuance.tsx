@@ -6,6 +6,7 @@ import { Toaster, toast } from "react-hot-toast";
 import type { Product } from "@/shared/product.interface";
 import { getErrorMessage } from "@/shared/api/axios";
 import { api } from "@/shared/api/endpoints";
+import { Search } from "lucide-react";
 
 export const IssuePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -66,13 +67,7 @@ export const IssuePage = () => {
         <h2 className="text-2xl font-bold text-gray-800">Поиск и выдача</h2>
         <p className="text-gray-500 mt-1">Найдите товар и выдайте клиенту</p>
       </div>
-      <div className="bg-(--bg-darck) rounded-2xl border border-gray-200 shadow-sm p-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 bg-linear-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center shadow-md shadow-green-500/20">
-            <Search className="w-5 h-5 text-white" />
-          </div>
-          <h3 className="text-lg font-semibold text-gray-700">Поиск товара</h3>
-        </div>
+      <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
         <div className="flex gap-4">
           <div className="flex-1 relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -84,13 +79,8 @@ export const IssuePage = () => {
             />
           </div>
         </div>
-        {error && (
-          <div className="mb-4 p-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg">
-            {error}
-          </div>
-        )}
         <ItemList
-          key={products.map((p) => p.id).join(',')}
+          key={products.map((p) => p.id).join(",")}
           products={products}
         />
         {products.length > 0 && (
