@@ -1,1 +1,2 @@
-export {default as IssuePage} from './ui/Issuance'
+import IssuePage from "./ui/Issuance";
+export default IssuePage
