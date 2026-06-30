@@ -77,7 +77,7 @@ export const ExcelUpload = ({ isUploaded, setIsUploaded }: Props) => {
 
   return (
     <div className="mt-10 flex justify-center">
-  <div className="w-full max-w-[1100px] rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+  <div className="w-full max-w-275 rounded-2xl border border-gray-200 bg-(--bg-light) p-6 shadow-sm">
   <div className="mb-4 flex items-center justify-between">
     <h3 className="text-lg font-semibold text-gray-700">
       Загрузка файла
@@ -85,12 +85,12 @@ export const ExcelUpload = ({ isUploaded, setIsUploaded }: Props) => {
   </div>
 
  <div
-  className={`flex items-center justify-center gap-3 rounded-xl border-2 border-dashed p-8 transition-all ${
+  className={`flex items-center justify-center gap-3 rounded-xl border-2 border-dashed p-8 transition-all bg-gray-100 ${
     isUploaded
       ? "cursor-not-allowed opacity-60 border-gray-200"
       : isDragging
-      ? "border-green-500 bg-green-50"
-      : "border-gray-300 hover:border-green-400 hover:bg-green-50/50"
+      ? "border-green-300 bg-green-100"
+      : "border-gray-300 hover:border-green-100 hover:bg-green-50/50"
   }`}
   onClick={() => {
     if (isUploaded) {
