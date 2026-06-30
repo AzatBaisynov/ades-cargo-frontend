@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { QrCode, Plus } from "lucide-react";
+import { api } from "@/shared/api/endpoints"
 
 interface TableRow {
   customerCode: string;
@@ -32,10 +33,30 @@ const ProductsPage = () => {
     customerRef.current?.focus();
   };
 
-  const handleSave = () => {
-    alert("Данные сохранены");
-  };
+ const handleSave = async () => {
+  if (!rows.length) return;
 
+  try {
+    const payload = {
+      items: rows.map((row) => ({
+        customer_code: row.customerCode.trim(),
+        product_code: row.productCode.trim(),
+        weight_Kg: Number(row.weight.replace(",", ".")),
+      })),
+    };
+
+    const { data } = await api.post(
+      "/product/acceptance",
+      payload
+    );
+
+    alert(`Сохранено ${data.count} товаров`);
+
+    setRows([]);
+  } catch (error) {
+    alert("Ошибка сохранения");
+  }
+};
   return (
     <div className="space-y-6">
       <div className="mb-6">
