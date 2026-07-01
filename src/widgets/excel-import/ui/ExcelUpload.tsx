@@ -121,8 +121,8 @@ export const ExcelUpload = ({ isUploaded, setIsUploaded }: Props) => {
   hidden
 />
 
-    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100">
-      <Upload className="h-6 w-6 text-green-600" />
+    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-300">
+      <Upload className="h-6 w-6 text-green-900" />
     </div>
 
     <div>

@@ -41,13 +41,27 @@ export const ImportChinaButton = ({ previewData, onSuccess }: ImportChinaButtonP
   };
 
   return (
-      <Button 
-        onClick={handleImport}
-        disabled={previewData.length === 0 || loading} 
-        className="font-(--fontweight-regular) min-w-37.5 absolute right-7"
-        isLoading= {loading}
-        >
-        Импортировать
-      </Button>
+     <Button
+  onClick={handleImport}
+  disabled={previewData.length === 0 || loading}
+  isLoading={loading}
+  className="
+    min-w-[150px]
+    rounded-xl
+    px-5
+    py-2.5
+    text-[var(--fs-base)]
+    font-[var(--font-weight-regular)]
+    text-white
+    bg-[var(--bg-dark)]
+    hover:opacity-90
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    transition-all
+    duration-200
+  "
+>
+  Импортировать
+</Button>
   );
 };

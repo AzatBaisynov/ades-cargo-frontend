@@ -3,10 +3,10 @@ import {
   Upload,
   Search,
   QrCode,
-  Truck,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import logo from "@/assets/images/ades.jpg"
 
 
 interface HeaderProps {
@@ -43,9 +43,13 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
 >
       <div className="border-b border-gray-100 p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-green-400 to-emerald-500">
-            <Truck className="h-5 w-5 text-white" />
-          </div>
+          <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl">
+  <img
+    src={logo}
+    alt="Ades Logo"
+    className="h-full w-full object-contain"
+  />
+</div>
 
           {!collapsed && (
   <div>

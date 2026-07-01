@@ -33,7 +33,16 @@ const ExcelPage = () => {
         setIsUploaded={setIsUploaded}
       />
 
-      <ExcelPreviewTable />
+      <ExcelPreviewTable>
+  <ImportChinaButton
+    previewData={previewData}
+    onSuccess={() => {
+      setSuccessOpen(true);
+      dispatch(clearExcelData());
+      setIsUploaded(false);
+    }}
+  />
+</ExcelPreviewTable>
 
       <ToastContainer
         position="top-right"
@@ -43,15 +52,6 @@ const ExcelPage = () => {
         closeOnClick
         pauseOnHover
         draggable
-      />
-
-      <ImportChinaButton
-        previewData={previewData}
-        onSuccess={() => {
-          setSuccessOpen(true);
-          dispatch(clearExcelData());
-          setIsUploaded(false);
-        }}
       />
 
       <ImportSuccessful

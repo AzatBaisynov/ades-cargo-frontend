@@ -1,7 +1,11 @@
 import { useAppSelector } from '@/app/store/hooks';
 import { columnLabels } from '../../../features/import-excel/model/columnLabels';
 
-export const ExcelPreviewTable = () => {
+interface ExcelPreviewTableProps {
+  children?: React.ReactNode;
+}
+
+export const ExcelPreviewTable = ({ children }: ExcelPreviewTableProps) => {
   const data = useAppSelector((state) => state.excel.data);
 
   return (
@@ -58,8 +62,12 @@ export const ExcelPreviewTable = () => {
     </table>
   </div>
 
- <div className="bg-gray-50 px-4 py-3 text-center text-sm text-gray-500">
-  Всего строк: {data.length}
+ <div className="flex items-center justify-between bg-gray-50 px-4 py-3">
+  <span className="text-sm text-gray-500">
+    Всего строк: {data.length}
+  </span>
+
+  {children}
 </div>
 </div>
           </>
