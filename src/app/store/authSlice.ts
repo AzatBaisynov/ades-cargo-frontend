@@ -44,7 +44,6 @@ interface RegisterPayload {
   password: string;
 }
 
-// TODO: заменить на реальный запрос к бэкенду, когда появятся эндпоинты
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (payload: LoginPayload, { rejectWithValue }) => {
@@ -65,7 +64,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// TODO: заменить на реальный запрос к бэкенду, когда появятся эндпоинты
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (payload: RegisterPayload, { rejectWithValue }) => {
