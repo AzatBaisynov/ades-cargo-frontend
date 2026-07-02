@@ -6,6 +6,7 @@ import {
   Truck,
   ChevronLeft,
   ChevronRight,
+  LogIn,
 } from "lucide-react";
 
 
@@ -32,6 +33,11 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
       path: "/issuance",
       label: "Выдача",
       icon: Search,
+    },
+    {
+      path: "/auth",
+      label: "Вход",
+      icon: LogIn,
     },
   ];
 

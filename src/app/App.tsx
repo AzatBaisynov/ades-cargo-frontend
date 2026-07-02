@@ -3,11 +3,15 @@ import MainLayout from "@/widgets/layout/ui/MainLayout";
 import ExcelPage from "@/pages/ImportExcel/ui/ExcelPage";
 import ProductPage from "@/pages/ProductPage/ui/ProductPage";
 import { IssuePage } from "@/pages/Issuance/ui/Issuance";
+import AuthPage from "@/pages/AuthPage/ui/AuthPage";
+import Protectedroute from "@/app/providers/ Protectedroute";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+          <Route path="/auth" element={<AuthPage />} />
+           <Route element={<Protectedroute />}></Route>
         <Route element={<MainLayout />}>
           <Route path="/" element={<ExcelPage />} />
           <Route path="/products" element={<ProductPage />} />
