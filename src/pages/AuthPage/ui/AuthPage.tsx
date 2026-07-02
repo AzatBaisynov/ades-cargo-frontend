@@ -15,9 +15,10 @@ const AuthPage = () => {
   const { status, error } = useAppSelector((state: RootState) => state.auth);
 
   const [mode, setMode] = useState<Mode>("login");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
@@ -33,21 +34,27 @@ const AuthPage = () => {
   const validate = () => {
     const errors: Record<string, string> = {};
 
-    if (isRegister && !name.trim()) {
-      errors.name = "Введите имя";
+    if (!userName.trim()) {
+      errors.userName = "Введите имя пользователя";
     }
-    if (!email.trim()) {
-      errors.email = "Введите email";
-    } else if (!EMAIL_RE.test(email)) {
-      errors.email = "Некорректный email";
+    if (!userPassword) {
+      errors.userPassword = "Введите пароль";
+    } else if (userPassword.length < 8) {
+      errors.userPassword = "Минимум 8 символов";
     }
-    if (!password) {
-      errors.password = "Введите пароль";
-    } else if (password.length < 8) {
-      errors.password = "Минимум 8 символов";
-    }
-    if (isRegister && password !== confirmPassword) {
-      errors.confirmPassword = "Пароли не совпадают";
+
+    if (isRegister) {
+      if (!fullname.trim()) {
+        errors.fullname = "Введите фамилию и имя";
+      }
+      if (!userEmail.trim()) {
+        errors.userEmail = "Введите email";
+      } else if (!EMAIL_RE.test(userEmail)) {
+        errors.userEmail = "Некорректный email";
+      }
+      if (userPassword !== confirmPassword) {
+        errors.confirmPassword = "Пароли не совпадают";
+      }
     }
 
     return errors;
@@ -60,8 +67,16 @@ const AuthPage = () => {
     if (Object.keys(errors).length > 0) return;
 
     const action = isRegister
-      ? registerUser({ name, email, password })
-      : loginUser({ email, password });
+      ? registerUser({
+          fullname,
+          user_name: userName,
+          user_password: userPassword,
+          user_email: userEmail,
+        })
+      : loginUser({
+          user_name: userName,
+          user_password: userPassword,
+        });
 
     const result = await dispatch(action);
     if (loginUser.fulfilled.match(result) || registerUser.fulfilled.match(result)) {
@@ -112,51 +127,69 @@ const AuthPage = () => {
         <form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
           {isRegister && (
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="name" className="text-xs font-medium text-gray-600">
-                Имя
+              <label htmlFor="fullname" className="text-xs font-medium text-gray-600">
+                Фамилия и имя
               </label>
               <input
-                id="name"
+                id="fullname"
                 type="text"
                 className={inputClass}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={fullname}
+                onChange={(e) => setFullname(e.target.value)}
               />
-              {fieldErrors.name && (
-                <span className="text-xs text-red-500">{fieldErrors.name}</span>
+              {fieldErrors.fullname && (
+                <span className="text-xs text-red-500">{fieldErrors.fullname}</span>
               )}
             </div>
           )}
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-xs font-medium text-gray-600">
-              Email
+            <label htmlFor="userName" className="text-xs font-medium text-gray-600">
+              Имя пользователя
             </label>
             <input
-              id="email"
-              type="email"
+              id="userName"
+              type="text"
               className={inputClass}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
             />
-            {fieldErrors.email && (
-              <span className="text-xs text-red-500">{fieldErrors.email}</span>
+            {fieldErrors.userName && (
+              <span className="text-xs text-red-500">{fieldErrors.userName}</span>
             )}
           </div>
 
+          {isRegister && (
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="userEmail" className="text-xs font-medium text-gray-600">
+                Email
+              </label>
+              <input
+                id="userEmail"
+                type="email"
+                className={inputClass}
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+              />
+              {fieldErrors.userEmail && (
+                <span className="text-xs text-red-500">{fieldErrors.userEmail}</span>
+              )}
+            </div>
+          )}
+
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-xs font-medium text-gray-600">
+            <label htmlFor="userPassword" className="text-xs font-medium text-gray-600">
               Пароль
             </label>
             <input
-              id="password"
+              id="userPassword"
               type="password"
               className={inputClass}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)}
             />
-            {fieldErrors.password && (
-              <span className="text-xs text-red-500">{fieldErrors.password}</span>
+            {fieldErrors.userPassword && (
+              <span className="text-xs text-red-500">{fieldErrors.userPassword}</span>
             )}
           </div>
 

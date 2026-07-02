@@ -1,9 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const API_URL = "http://localhost:3000";
+
 export interface User {
   id: string;
-  name: string;
-  email: string;
+  fullname: string;
+  user_name: string;
+  user_email: string;
 }
 
 interface AuthState {
@@ -34,53 +37,97 @@ const initialState: AuthState = {
 };
 
 interface LoginPayload {
-  email: string;
-  password: string;
+  user_name: string;
+  user_password: string;
 }
 
 interface RegisterPayload {
-  name: string;
-  email: string;
-  password: string;
+  fullname: string;
+  user_name: string;
+  user_password: string;
+  user_email: string;
 }
+
+const extractErrorMessage = async (res: Response, fallback: string) => {
+  try {
+    const data = await res.json();
+    return data?.message ?? fallback;
+  } catch {
+    return fallback;
+  }
+};
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (payload: LoginPayload, { rejectWithValue }) => {
-    await new Promise((resolve) => setTimeout(resolve, 700));
+    const res = await fetch(`${API_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-    if (payload.password.length < 8) {
-      return rejectWithValue("Неверный email или пароль");
+    if (!res.ok) {
+      const message = await extractErrorMessage(res, "Не удалось войти");
+      return rejectWithValue(message);
     }
 
-    return {
-      user: {
-        id: "mock-1",
-        name: payload.email.split("@")[0],
-        email: payload.email,
-      },
-      token: "mock-token-" + Date.now(),
+    const data = await res.json();
+
+    const user: User = {
+      id: "",
+      fullname: "",
+      user_name: payload.user_name,
+      user_email: "",
     };
+
+    return { user, token: data.access_token as string };
   }
 );
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (payload: RegisterPayload, { rejectWithValue }) => {
-    await new Promise((resolve) => setTimeout(resolve, 700));
+    const registerRes = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-    if (!payload.name.trim()) {
-      return rejectWithValue("Не удалось зарегистрироваться");
+    if (!registerRes.ok) {
+      const message = await extractErrorMessage(
+        registerRes,
+        "Не удалось зарегистрироваться"
+      );
+      return rejectWithValue(message);
     }
 
-    return {
-      user: {
-        id: "mock-" + Date.now(),
-        name: payload.name,
-        email: payload.email,
-      },
-      token: "mock-token-" + Date.now(),
+    const loginRes = await fetch(`${API_URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_name: payload.user_name,
+        user_password: payload.user_password,
+      }),
+    });
+
+    if (!loginRes.ok) {
+      const message = await extractErrorMessage(
+        loginRes,
+        "Регистрация прошла, но не удалось войти"
+      );
+      return rejectWithValue(message);
+    }
+
+    const loginData = await loginRes.json();
+
+    const user: User = {
+      id: "",
+      fullname: payload.fullname,
+      user_name: payload.user_name,
+      user_email: payload.user_email,
     };
+
+    return { user, token: loginData.access_token as string };
   }
 );
 
