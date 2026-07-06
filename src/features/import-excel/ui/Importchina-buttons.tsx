@@ -17,9 +17,7 @@ export const ImportChinaButton = ({ previewData, onSuccess }: ImportChinaButtonP
 
     try {
       setLoading(true)
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/product/import-china`, previewData
-
-      );
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/product/import-china`, previewData);
 
       if (response.status === 200 || response.status === 201) {
         onSuccess?.();
