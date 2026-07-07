@@ -5,6 +5,7 @@ import {
   QrCode,
   ChevronLeft,
   ChevronRight,
+  LogIn,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg"
 
@@ -32,6 +33,11 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
       path: "/issuance",
       label: "Выдача",
       icon: Search,
+    },
+    {
+      path: "/auth",
+      label: "Вход",
+      icon: LogIn,
     },
   ];
 
