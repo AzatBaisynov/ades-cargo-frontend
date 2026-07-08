@@ -5,10 +5,9 @@ import { ImportChinaButton } from "@/features/import-excel/ui/Importchina-button
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppSelector } from "@/app/store/hooks";
-import { ImportSuccessful } from "./ImportSuccessful"
+import { ImportSuccessful } from "./ImportSuccessful";
 import { useAppDispatch } from "@/app/store/hooks";
 import { clearExcelData } from "@/features/import-excel/model/excelSlice";
-
 
 const ExcelPage = () => {
   const [isUploaded, setIsUploaded] = useState(false);
@@ -18,31 +17,24 @@ const ExcelPage = () => {
 
   return (
     <div className="mb-10 space-y-8">
-     <div className="mx-auto w-full max-w-[1100px]">
-  <h2 className="text-2xl font-bold text-gray-800">
-    Импорт данных
-  </h2>
+      <div className="mx-auto w-full max-w-275">
+        <h2 className="text-2xl font-bold text-gray-800">Импорт данных</h2>
 
-  <p className="mt-1 text-gray-500">
-    Загрузите Excel файл с товарами
-  </p>
-</div>
+        <p className="mt-1 text-gray-500">Загрузите Excel файл с товарами</p>
+      </div>
 
-      <ExcelUpload
-        isUploaded={isUploaded}
-        setIsUploaded={setIsUploaded}
-      />
+      <ExcelUpload isUploaded={isUploaded} setIsUploaded={setIsUploaded} />
 
       <ExcelPreviewTable>
-  <ImportChinaButton
-    previewData={previewData}
-    onSuccess={() => {
-      setSuccessOpen(true);
-      dispatch(clearExcelData());
-      setIsUploaded(false);
-    }}
-  />
-</ExcelPreviewTable>
+        <ImportChinaButton
+          previewData={previewData}
+          onSuccess={() => {
+            setSuccessOpen(true);
+            dispatch(clearExcelData());
+            setIsUploaded(false);
+          }}
+        />
+      </ExcelPreviewTable>
 
       <ToastContainer
         position="top-right"
