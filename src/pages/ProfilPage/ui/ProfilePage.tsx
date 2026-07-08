@@ -23,7 +23,6 @@ const ProfilePage = () => {
 
   return (
     <div className="space-y-6">
-      {/* Заголовок страницы */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-800">
           Профиль
@@ -37,7 +36,6 @@ const ProfilePage = () => {
       <div className="mx-auto max-w-3xl rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
         {token && user ? (
           <>
-            {/* Информация пользователя */}
             <div className="mb-8 flex items-center gap-5">
               <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 shadow-md shadow-green-500/20">
                 <User size={40} className="text-white" />
@@ -55,7 +53,7 @@ const ProfilePage = () => {
             </div>
 
 
-            {/* Данные пользователя */}
+          
             <div className="space-y-3">
               <div className="flex items-center justify-between rounded-xl bg-gray-50 p-4">
                 <span className="text-gray-500">
@@ -91,7 +89,7 @@ const ProfilePage = () => {
             </div>
 
 
-            {/* Кнопка выхода */}
+            
             <div className="mt-8 flex justify-end">
               <button
                 onClick={handleLogout}
