@@ -6,6 +6,7 @@ import {
   ChevronLeft,
   ChevronRight,
   LogIn,
+  User,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg"
 
@@ -39,6 +40,12 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
       label: "Вход",
       icon: LogIn,
     },
+
+{
+  label: "Профиль",
+  path: "/profile",
+  icon: User,
+}
   ];
 
   return (
