@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { loginUser, registerUser, clearAuthError } from "@/app/store/authSlice";
 import type { RootState } from "@/app/store/store";
@@ -21,6 +22,8 @@ const AuthPage = () => {
   const [userPassword, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const isRegister = mode === "register";
   const isLoading = status === "loading";
@@ -181,13 +184,24 @@ const AuthPage = () => {
             <label htmlFor="userPassword" className="text-xs font-medium text-gray-600">
               Пароль
             </label>
-            <input
-              id="userPassword"
-              type="password"
-              className={inputClass}
-              value={userPassword}
-              onChange={(e) => setUserPassword(e.target.value)}
-            />
+            <div className="relative">
+          <input
+             id="userPassword"
+            type={showPassword ? "text" : "password"}
+            className={`${inputClass} pr-10`}
+            value={userPassword}
+            onChange={(e) => setUserPassword(e.target.value)}
+         />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            tabIndex={-1}
+            aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
+         >
+           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+         </button>
+        </div>
             {fieldErrors.userPassword && (
               <span className="text-xs text-red-500">{fieldErrors.userPassword}</span>
             )}
@@ -201,13 +215,24 @@ const AuthPage = () => {
               >
                 Повторите пароль
               </label>
+              <div className="relative">
               <input
                 id="confirmPassword"
-                type="password"
-                className={inputClass}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+                 type={showConfirmPassword ? "text" : "password"}
+                 className={`${inputClass} pr-10`}
+                 value={confirmPassword}
+                 onChange={(e) => setConfirmPassword(e.target.value)}
+             />
+             <button
+               type="button"
+               onClick={() => setShowConfirmPassword((v) => !v)}
+               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+               tabIndex={-1}
+               aria-label={showConfirmPassword ? "Скрыть пароль" : "Показать пароль"}
+              >
+               {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
               {fieldErrors.confirmPassword && (
                 <span className="text-xs text-red-500">
                   {fieldErrors.confirmPassword}

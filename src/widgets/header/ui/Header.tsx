@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Upload,
   Search,
@@ -6,8 +6,12 @@ import {
   ChevronLeft,
   ChevronRight,
   LogIn,
+  LogOut,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg"
+import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { logout } from "@/app/store/authSlice";
+import type { RootState } from "@/app/store/store";
 
 
 interface HeaderProps {
@@ -16,7 +20,15 @@ interface HeaderProps {
 }
 
 const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
-  const location = useLocation();
+const location = useLocation();
+const navigate = useNavigate();
+const dispatch = useAppDispatch();
+const token = useAppSelector((state: RootState) => state.auth.token);
+
+const handleLogout = () => {
+  dispatch(logout());
+  navigate("/auth");
+};
 
   const navItems = [
     {
@@ -36,8 +48,8 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
     },
     {
       path: "/auth",
-      label: "Вход",
-      icon: LogIn,
+      label: token ? "Выход" : "Вход",
+      icon: token ? LogOut : LogIn,
     },
   ];
 
@@ -77,6 +89,20 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
 
           const isActive =
             location.pathname === item.path;
+          const isAuthItem = item.path === "/auth";
+
+      if (isAuthItem && token) {
+        return (
+     <button
+         key={item.path}
+         onClick={handleLogout}
+         className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-700"
+       >
+         <Icon className="h-5 w-5" />
+         {!collapsed && <span>{item.label}</span>}
+       </button>
+     );
+    }
 
           return (
             <Link
