@@ -67,20 +67,20 @@ export const loginUser = createAsyncThunk(
     });
 
     if (!res.ok) {
-      const message = await extractErrorMessage(res, "Не удалось войти");
+      const message = await extractErrorMessage(
+        res,
+        "Не удалось войти"
+      );
+
       return rejectWithValue(message);
     }
 
     const data = await res.json();
 
-    const user: User = {
-      id: "",
-      fullname: "",
-      user_name: payload.user_name,
-      user_email: "",
+    return {
+      user: data.user as User,
+      token: data.access_token as string,
     };
-
-    return { user, token: data.access_token as string };
   }
 );
 
@@ -127,7 +127,10 @@ export const registerUser = createAsyncThunk(
       user_email: payload.user_email,
     };
 
-    return { user, token: loginData.access_token as string };
+    return {
+  user: loginData.user as User,
+  token: loginData.access_token as string,
+};
   }
 );
 

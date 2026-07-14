@@ -6,6 +6,7 @@ import {
   ChevronLeft,
   ChevronRight,
   LogIn,
+  User,
   LogOut,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg"
@@ -51,6 +52,12 @@ const handleLogout = () => {
       label: token ? "Выход" : "Вход",
       icon: token ? LogOut : LogIn,
     },
+
+{
+  label: "Профиль",
+  path: "/profile",
+  icon: User,
+}
   ];
 
   return (
