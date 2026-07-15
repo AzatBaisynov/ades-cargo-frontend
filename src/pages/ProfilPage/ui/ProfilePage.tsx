@@ -8,9 +8,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { user, token } = useAppSelector(
-    (state: RootState) => state.auth
-  );
+  const { user, token } = useAppSelector((state: RootState) => state.auth);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -24,13 +22,9 @@ const ProfilePage = () => {
   return (
     <div className="space-y-6">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">
-          Профиль
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-800">Профиль</h2>
 
-        <p className="mt-1 text-gray-500">
-          Информация о пользователе
-        </p>
+        <p className="mt-1 text-gray-500">Информация о пользователе</p>
       </div>
 
       <div className="mx-auto max-w-3xl rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -46,41 +40,29 @@ const ProfilePage = () => {
                   {user.fullname || "Пользователь"}
                 </h3>
 
-                <p className="mt-1 text-gray-500">
-                  @{user.user_name}
-                </p>
+                <p className="mt-1 text-gray-500">@{user.user_name}</p>
               </div>
             </div>
 
-
-          
             <div className="space-y-3">
               <div className="flex items-center justify-between rounded-xl bg-gray-50 p-4">
-                <span className="text-gray-500">
-                  Полное имя
-                </span>
+                <span className="text-gray-500">Полное имя</span>
 
                 <span className="font-medium text-gray-800">
                   {user.fullname || "-"}
                 </span>
               </div>
 
-
               <div className="flex items-center justify-between rounded-xl bg-gray-50 p-4">
-                <span className="text-gray-500">
-                  Логин
-                </span>
+                <span className="text-gray-500">Логин</span>
 
                 <span className="font-medium text-gray-800">
                   {user.user_name}
                 </span>
               </div>
 
-
               <div className="flex items-center justify-between rounded-xl bg-gray-50 p-4">
-                <span className="text-gray-500">
-                  Email
-                </span>
+                <span className="text-gray-500">Email</span>
 
                 <span className="font-medium text-gray-800">
                   {user.user_email || "-"}
@@ -88,8 +70,6 @@ const ProfilePage = () => {
               </div>
             </div>
 
-
-            
             <div className="mt-8 flex justify-end">
               <button
                 onClick={handleLogout}

@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { uploadExcel } from './excelThunk';
+import { createSlice } from "@reduxjs/toolkit";
+import { uploadExcel } from "./excelThunk";
 
 interface ExcelState {
   loading: boolean;
@@ -11,18 +11,18 @@ interface ExcelState {
 const initialState: ExcelState = {
   loading: false,
   success: false,
-  message: '',
+  message: "",
   data: [],
 };
 
 const excelSlice = createSlice({
-  name: 'excel',
+  name: "excel",
   initialState,
   reducers: {
     clearExcelData: (state) => {
       state.data = [];
       state.success = false;
-      state.message = '';
+      state.message = "";
     },
   },
   extraReducers: (builder) => {
@@ -30,7 +30,7 @@ const excelSlice = createSlice({
       .addCase(uploadExcel.pending, (state) => {
         state.loading = true;
         state.success = false;
-        state.message = '';
+        state.message = "";
       })
 
       .addCase(uploadExcel.fulfilled, (state, action) => {

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "@/widgets/layout/ui/MainLayout";
 import ExcelPage from "@/pages/ImportExcel/ui/ExcelPage";
 import ProductPage from "@/pages/ProductPage/ui/ProductPage";
@@ -10,19 +10,18 @@ import ProfilePage from "@/pages/ProfilPage/ui/ProfilePage";
 const App = () => {
   return (
     <BrowserRouter>
-     <Routes>
-    <Route path="/auth" element={<AuthPage />} />
+      <Routes>
+        <Route path="/auth" element={<AuthPage />} />
 
-    <Route element={<Protectedroute />}>
-      <Route element={<MainLayout />}>
-       <Route path="/" element={<ExcelPage />} />
-       <Route path="/products" element={<ProductPage />} />
-       <Route path="/issuance" element={<IssuePage />} />
-       <Route path="/profile" element={<ProfilePage />} />
-      </Route>
-    </Route>
-  </Routes>
-      
+        <Route element={<Protectedroute />}>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<ExcelPage />} />
+            <Route path="/products" element={<ProductPage />} />
+            <Route path="/issuance" element={<IssuePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Route>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 };

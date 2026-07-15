@@ -5,9 +5,9 @@ interface ProductInputCardProps {
   customerCode: string;
   productCode: string;
   weight: string;
-  customerRef: RefObject<HTMLInputElement>;
-  productRef: RefObject<HTMLInputElement>;
-  weightRef: RefObject<HTMLInputElement>;
+  customerRef: React.RefObject<HTMLInputElement | null>;
+  productRef: React.RefObject<HTMLInputElement | null>;
+  weightRef: React.RefObject<HTMLInputElement | null>;
   onChangeCustomer: (value: string) => void;
   onChangeProduct: (value: string) => void;
   onChangeWeight: (value: string) => void;

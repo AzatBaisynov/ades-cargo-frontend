@@ -1,12 +1,17 @@
-import type React from "react"
+import type React from "react";
 
-interface ButtonProps  extends React.ButtonHTMLAttributes<HTMLButtonElement>{
-    children: React.ReactNode
-    isLoading?:boolean
-   
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  isLoading?: boolean;
 }
-export const Button = ({isLoading,disabled, children,className='', ...props}:ButtonProps) => {
-    return (
+export const Button = ({
+  isLoading,
+  disabled,
+  children,
+  className = "",
+  ...props
+}: ButtonProps) => {
+  return (
     <button
       disabled={disabled || isLoading}
       className={`
@@ -15,7 +20,8 @@ export const Button = ({isLoading,disabled, children,className='', ...props}:But
         ${className}
       `}
       {...props}
-    >{isLoading ? "Сохранение..." : children}
+    >
+      {isLoading ? "Сохранение..." : children}
     </button>
   );
-}
+};
