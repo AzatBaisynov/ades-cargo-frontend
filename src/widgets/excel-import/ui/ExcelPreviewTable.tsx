@@ -1,5 +1,5 @@
-import { useAppSelector } from '@/app/store/hooks';
-import { columnLabels } from '../../../features/import-excel/model/columnLabels';
+import { useAppSelector } from "@/app/store/hooks";
+import { columnLabels } from "../../../features/import-excel/model/columnLabels";
 
 interface ExcelPreviewTableProps {
   children?: React.ReactNode;
@@ -18,58 +18,58 @@ export const ExcelPreviewTable = ({ children }: ExcelPreviewTableProps) => {
         ) : (
           <>
             <div className="flex items-center justify-between border-b border-gray-100 p-4">
-  <h3 className="text-lg font-semibold text-gray-700">
-    Предпросмотр
-    <span className="ml-2 text-sm font-normal text-gray-400">
-      ({data.length} записей)
-    </span>
-  </h3>
-</div>
+              <h3 className="text-lg font-semibold text-gray-700">
+                Предпросмотр
+                <span className="ml-2 text-sm font-normal text-gray-400">
+                  ({data.length} записей)
+                </span>
+              </h3>
+            </div>
 
             <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-  <div className="custom-scrollbar max-h-[420px] overflow-auto">
-    <table className="w-full table-fixed border-separate border-spacing-0">
-      <thead>
-  <tr>
-    {Object.keys(data[0]).map((key) => (
-      <th
-        key={key}
-       className="sticky top-0 z-10 bg-gray-50 px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-      >
-        {columnLabels[key] ?? key}
-      </th>
-    ))}
-  </tr>
-</thead>
+              <div className="custom-scrollbar max-h-[420px] overflow-auto">
+                <table className="w-full table-fixed border-separate border-spacing-0">
+                  <thead>
+                    <tr>
+                      {Object.keys(data[0]).map((key) => (
+                        <th
+                          key={key}
+                          className="sticky top-0 z-10 bg-gray-50 px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                        >
+                          {columnLabels[key] ?? key}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
 
-<tbody>
-  {data.map((row, i) => (
-    <tr
-      key={i}
-      className="transition-colors hover:bg-gray-50"
-    >
-      {Object.keys(row).map((key) => (
-        <td
-          key={key}
-          className="px-4 py-3 text-sm text-gray-600"
-        >
-          {String(row[key] ?? '')}
-        </td>
-      ))}
-    </tr>
-  ))}
-</tbody>
-    </table>
-  </div>
+                  <tbody>
+                    {data.map((row, i) => (
+                      <tr
+                        key={i}
+                        className="transition-colors hover:bg-gray-50"
+                      >
+                        {Object.keys(row).map((key) => (
+                          <td
+                            key={key}
+                            className="px-4 py-3 text-sm text-gray-600"
+                          >
+                            {String(row[key] ?? "")}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
- <div className="flex items-center justify-between bg-gray-50 px-4 py-3">
-  <span className="text-sm text-gray-500">
-    Всего строк: {data.length}
-  </span>
+              <div className="flex items-center justify-between bg-gray-50 px-4 py-3">
+                <span className="text-sm text-gray-500">
+                  Всего строк: {data.length}
+                </span>
 
-  {children}
-</div>
-</div>
+                {children}
+              </div>
+            </div>
           </>
         )}
       </div>

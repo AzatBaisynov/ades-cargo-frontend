@@ -67,10 +67,7 @@ export const loginUser = createAsyncThunk(
     });
 
     if (!res.ok) {
-      const message = await extractErrorMessage(
-        res,
-        "Не удалось войти"
-      );
+      const message = await extractErrorMessage(res, "Не удалось войти");
 
       return rejectWithValue(message);
     }
@@ -128,9 +125,9 @@ export const registerUser = createAsyncThunk(
     };
 
     return {
-  user: loginData.user as User,
-  token: loginData.access_token as string,
-};
+      user: loginData.user as User,
+      token: loginData.access_token as string,
+    };
   }
 );
 

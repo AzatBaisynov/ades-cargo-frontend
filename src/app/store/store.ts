@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
-import excelReducer from '@/features/import-excel/model/excelSlice';
-import authReducer from '@/app/store/authSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import excelReducer from "@/features/import-excel/model/excelSlice";
+import authReducer from "@/app/store/authSlice";
 
 export const store = configureStore({
   reducer: {
