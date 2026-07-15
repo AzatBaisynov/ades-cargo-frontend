@@ -8,6 +8,7 @@ import {
   LogIn,
   LogOut,
   User,
+  DollarSign,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -42,9 +43,19 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
       icon: QrCode,
     },
     {
+      path: "/cargo-price",
+      label: "Цена",
+      icon: DollarSign,
+    },
+    {
       path: "/issuance",
       label: "Выдача",
       icon: Search,
+    },
+    {
+      label: "Профиль",
+      path: "/profile",
+      icon: User,
     },
     {
       path: "/auth",
@@ -52,18 +63,13 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
       icon: token ? LogOut : LogIn,
     },
 
-    {
-      label: "Профиль",
-      path: "/profile",
-      icon: User,
-    },
+    
   ];
 
   return (
     <aside
-      className={`fixed left-0 top-0 h-screen border-r border-gray-200 bg-white shadow-sm transition-all duration-300 ${
-        collapsed ? "w-20" : "w-64"
-      }`}
+      className={`fixed left-0 top-0 h-screen border-r border-gray-200 bg-white shadow-sm transition-all duration-300 ${collapsed ? "w-20" : "w-64"
+        }`}
     >
       <div className="border-b border-gray-100 p-4">
         <div className="flex items-center gap-3">
@@ -110,11 +116,10 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
               key={item.path}
               to={item.path}
               className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all
-              ${
-                isActive
+              ${isActive
                   ? "bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-md"
                   : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-              }`}
+                }`}
             >
               <Icon className="h-5 w-5" />
               {!collapsed && <span>{item.label}</span>}

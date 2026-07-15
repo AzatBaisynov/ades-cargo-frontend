@@ -22,14 +22,14 @@ export const SearchForm = ({
   return (
     <form onSubmit={handleSubmit} className="flex gap-3 mb-6 w-full max-w-xl">
       <div className="relative flex-1">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-green-300" />
         <input
           type="search"
           placeholder="Введите код клиента"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           disabled={loading}
-          className="w-full pl-12 pr-4 py-3 bg-(--bg-dark) border border-green-600 rounded-xl text-(--text-light) placeholder:text-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
+          className="w-full pl-12 pr-4 py-3 bg-(--bg-dark) border border-green-600 rounded-xl text-white placeholder:text-green-300 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-100 transition-all"
         />
       </div>
       <button
