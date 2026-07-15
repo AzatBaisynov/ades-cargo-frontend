@@ -8,6 +8,7 @@ import {
   LogIn,
   LogOut,
   User,
+  LogOut,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
