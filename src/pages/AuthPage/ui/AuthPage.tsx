@@ -60,7 +60,10 @@ const AuthPage = () => {
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="userName" className="text-xs font-medium text-gray-600">
+            <label
+              htmlFor="userName"
+              className="text-xs font-medium text-gray-600"
+            >
               Имя пользователя
             </label>
             <input
@@ -71,12 +74,17 @@ const AuthPage = () => {
               onChange={(e) => setUserName(e.target.value)}
             />
             {fieldErrors.userName && (
-              <span className="text-xs text-red-500">{fieldErrors.userName}</span>
+              <span className="text-xs text-red-500">
+                {fieldErrors.userName}
+              </span>
             )}
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="userPassword" className="text-xs font-medium text-gray-600">
+            <label
+              htmlFor="userPassword"
+              className="text-xs font-medium text-gray-600"
+            >
               Пароль
             </label>
             <div className="relative">

@@ -7,10 +7,7 @@ const MainLayout = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header
-        collapsed={collapsed}
-        setCollapsed={setCollapsed}
-      />
+      <Header collapsed={collapsed} setCollapsed={setCollapsed} />
 
       <main
         className={`min-h-screen p-8 transition-all duration-300 ${

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "@/widgets/layout/ui/MainLayout";
 import ExcelPage from "@/pages/ImportExcel/ui/ExcelPage";
 import ProductPage from "@/pages/ProductPage/ui/ProductPage";
@@ -11,8 +11,8 @@ import EmployeesPage from "@/pages/EmployeesPage/ui/EmployeesPage";
 const App = () => {
   return (
     <BrowserRouter>
-     <Routes>
-    <Route path="/auth" element={<AuthPage />} />
+      <Routes>
+        <Route path="/auth" element={<AuthPage />} />
 
     <Route element={<Protectedroute />}>
       <Route element={<MainLayout />}>

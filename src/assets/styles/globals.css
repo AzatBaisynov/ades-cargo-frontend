@@ -1,9 +1,7 @@
-
 /* @import "./reset.css"; */
 @import "./font.css";
 @import "./varialbles.css";
 @import "tailwindcss";
-
 
 body {
   font-family: var(--font-main);

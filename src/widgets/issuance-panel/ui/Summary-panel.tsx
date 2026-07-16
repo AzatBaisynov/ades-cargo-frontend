@@ -1,4 +1,4 @@
-import { Button } from '../../../features/import-excel/ui/ButtonUni';
+import { Button } from "../../../features/import-excel/ui/ButtonUni";
 
 interface SummaryPanelProps {
   totalCount: number;
@@ -14,7 +14,7 @@ export const SummaryPanel = ({
   return (
     <div className="text-(--text-light) text-base">
       <div>
-        Готово к выдаче товаров:{' '}
+        Готово к выдаче товаров:{" "}
         <span className="font-bold text-lg text-blue-600">{totalCount}шт.</span>
       </div>
       <Button
@@ -22,7 +22,7 @@ export const SummaryPanel = ({
         disabled={submitting || totalCount === 0}
         className="w-full sm:w-auto px-8 py-3 font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-md active:scale-[0.98]"
       >
-        {submitting ? 'Оформление выдачи...' : 'Выдать все товары'}
+        {submitting ? "Оформление выдачи..." : "Выдать все товары"}
       </Button>
     </div>
   );
