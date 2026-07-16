@@ -8,6 +8,7 @@ import {
   LogIn,
   User,
   LogOut,
+  Users,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg"
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -46,6 +47,11 @@ const handleLogout = () => {
       path: "/issuance",
       label: "Выдача",
       icon: Search,
+    },
+    {
+      path: "/employees",
+      label: "Сотрудники",
+      icon: Users,
     },
     {
       path: "/auth",
