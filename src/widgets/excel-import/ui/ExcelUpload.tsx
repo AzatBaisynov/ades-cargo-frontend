@@ -79,7 +79,7 @@ export const ExcelUpload = ({ isUploaded, setIsUploaded }: Props) => {
     <div className="mt-10 flex justify-center">
       <div className="w-full max-w-275 rounded-2xl border border-gray-200 bg-(--bg-light) p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-700">
+          <h3 className="text-lg font-semibold text-gray-900">
             Загрузка файла
           </h3>
         </div>
