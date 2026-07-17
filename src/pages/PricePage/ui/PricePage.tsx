@@ -39,14 +39,14 @@ const CargoPricePage = () => {
             <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
 
                 <label className="mb-2 block text-sm text-gray-600">
-                    Цена за 1 кг ($)
+                    Цена за 1 кг (сом)
                 </label>
 
 
                 <input
                     type="text"
                     value={price}
-                    placeholder="Например: 3.5"
+                    placeholder="Например: 87"
                     onChange={(e) =>
                         setPrice(
                             e.target.value.replace(/[^0-9.]/g, "")
