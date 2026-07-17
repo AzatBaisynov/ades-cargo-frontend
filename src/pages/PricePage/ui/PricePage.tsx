@@ -12,6 +12,9 @@ const CargoPricePage = () => {
             const { data } = await api.post("/price/set", {
                 current_price: Number(price),
             });
+
+            console.log(data);
+
             setIsSuccessOpen(true);
             setPrice("");
 
