@@ -9,6 +9,7 @@ import {
   LogOut,
   User,
   DollarSign,
+  Users,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -56,6 +57,9 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
       label: "Профиль",
       path: "/profile",
       icon: User,
+      path: "/employees",
+      label: "Сотрудники",
+      icon: Users,
     },
     {
       path: "/auth",
