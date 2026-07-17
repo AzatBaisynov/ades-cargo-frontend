@@ -57,9 +57,12 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
       label: "Профиль",
       path: "/profile",
       icon: User,
-      path: "/employees",
+      
+    },
+    
+    {path: "/employees",
       label: "Сотрудники",
-      icon: Users,
+      icon: Users
     },
     {
       path: "/auth",
