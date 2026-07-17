@@ -7,6 +7,7 @@ import AuthPage from "@/pages/AuthPage/ui/AuthPage";
 import Protectedroute from "@/app/providers/Protectedroute";
 import ProfilePage from "@/pages/ProfilPage/ui/ProfilePage";
 import PricePage from "@/pages/PricePage/ui/PricePage";
+import EmployeesPage from "@/pages/EmployeesPage/ui/EmployeesPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/issuance" element={<IssuePage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/cargo-price" element={<PricePage />} />
+            <Route path="/employees" element={<EmployeesPage />} />
           </Route>
         </Route>
       </Routes>
