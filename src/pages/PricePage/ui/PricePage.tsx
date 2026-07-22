@@ -6,6 +6,7 @@ const CargoPricePage = () => {
     const [price, setPrice] = useState("");
     const [savedPrice, setSavedPrice] = useState<number | null>(null);
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         const fetchPrice = async () => {
@@ -17,17 +18,21 @@ const CargoPricePage = () => {
     }, []);
 
     const handleSave = async () => {
-        if (!price) return;
+        if (!price.trim()) {
+            setError(true);
+            return;
+        }
+
+        setError(false);
 
         try {
-            const { data } = await api.post("/price/set", {
+            await api.post("/price/set", {
                 current_price: Number(price),
             });
 
             setSavedPrice(Number(price));
             setIsSuccessOpen(true);
             setPrice("");
-
         } catch (error) {
             console.log(error);
         }
@@ -54,11 +59,10 @@ const CargoPricePage = () => {
                     type="text"
                     value={price}
                     placeholder="Например: 87"
-                    onChange={(e) =>
-                        setPrice(
-                            e.target.value.replace(/[^0-9.]/g, "")
-                        )
-                    }
+                    onChange={(e) => {
+                        setPrice(e.target.value.replace(/[^0-9.]/g, ""));
+                        setError(false);
+                    }}
                     className="
                         w-full rounded-xl border border-gray-200
                         bg-gray-50 px-4 py-3
@@ -73,7 +77,13 @@ const CargoPricePage = () => {
                     </p>
                 )}
 
-                <div className="mt-5 flex justify-end">
+                <div className="mt-5 flex items-center justify-end gap-3">
+                    {error && (
+                        <span className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                            ⚠️ Поле не может быть пустым!
+                        </span>
+                    )}
+
                     <button
                         onClick={handleSave}
                         className="
