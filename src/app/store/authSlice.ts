@@ -7,6 +7,7 @@ export interface User {
   fullname: string;
   user_name: string;
   user_email: string;
+   role: string;  
 }
 
 interface AuthState {
