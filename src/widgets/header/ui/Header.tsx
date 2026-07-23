@@ -9,6 +9,7 @@ import {
   LogOut,
   User,
   Users,
+  DollarSign,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg";
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
@@ -25,6 +26,8 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const token = useAppSelector((state: RootState) => state.auth.token);
+  const user = useAppSelector((state: RootState) => state.auth.user);
+  const isAdmin = user?.role === "admin";
 
   const handleLogout = () => {
     dispatch(logout());
@@ -59,10 +62,9 @@ const Header = ({ collapsed, setCollapsed }: HeaderProps) => {
       
     },
     
-    {path: "/employees",
-      label: "Сотрудники",
-      icon: Users
-    },
+    ...(isAdmin
+      ? [{ path: "/employees", label: "Сотрудники", icon: Users }]
+      : []),
     {
       path: "/auth",
       label: token ? "Выход" : "Вход",
