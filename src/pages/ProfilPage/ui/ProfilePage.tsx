@@ -31,7 +31,7 @@ const ProfilePage = () => {
         {token && user ? (
           <>
             <div className="mb-8 flex items-center gap-5">
-              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 shadow-md shadow-green-500/20">
+              <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-linear-to-br from-green-400 to-emerald-500 shadow-md shadow-green-500/20">
                 <User size={40} className="text-white" />
               </div>
 
@@ -73,7 +73,7 @@ const ProfilePage = () => {
             <div className="mt-8 flex justify-end">
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-red-500 to-rose-500 px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:from-red-600 hover:to-rose-600"
+                className="flex items-center gap-2 rounded-xl bg-linear-to-r from-red-500 to-rose-500 px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:from-red-600 hover:to-rose-600"
               >
                 <LogOut size={16} />
                 Выйти
@@ -96,7 +96,7 @@ const ProfilePage = () => {
 
             <button
               onClick={handleLogin}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 py-3 font-medium text-white shadow-md transition-all hover:from-green-600 hover:to-emerald-600"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-green-500 to-emerald-500 py-3 font-medium text-white shadow-md transition-all hover:from-green-600 hover:to-emerald-600"
             >
               <LogIn size={18} />
               Войти

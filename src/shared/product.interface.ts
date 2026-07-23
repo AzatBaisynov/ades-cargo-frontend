@@ -3,7 +3,9 @@ export interface Product {
   customer_code: string;
   product_code: string;
   status: string;
-  createdAt: string;
+  weight_Kg: number | null;
+  current_price: number | null;
+  total_price: number | null;
 }
 export interface NestApiError {
   statusCode: number;

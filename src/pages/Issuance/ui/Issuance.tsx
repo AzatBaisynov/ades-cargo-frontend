@@ -4,12 +4,14 @@ import { SearchForm } from "@/widgets/issuance-panel/ui/Search-form";
 import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import type { Product } from "@/shared/product.interface";
+import type { ProductSearchResponse } from "@/shared/product-search.interface";
 import { getErrorMessage } from "@/shared/api/axios";
 import { api } from "@/shared/api/endpoints";
 import { Search } from "lucide-react";
 
 export const IssuePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [clientTotalPrice, setClientTotalPrice] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [, setError] = useState<string | null>(null);
@@ -17,13 +19,16 @@ export const IssuePage = () => {
 
   const handleSearch = async (customer_code: string) => {
     setProducts([]);
+    setClientTotalPrice(0);
     setLoading(true);
     setError(null);
     try {
-      const { data } = await api.get<Product[]>(
+      const { data } = await api.get<ProductSearchResponse>(
         `/product/search/${customer_code}`
       );
-      setProducts(data);
+
+      setProducts(data.products);
+      setClientTotalPrice(data.client_total_price);
     } catch (error) {
       const msg = getErrorMessage(error);
       setError(msg);
@@ -45,6 +50,7 @@ export const IssuePage = () => {
       toast.success(`Успешно выдано товаров: ${products.length} шт.`);
       setProducts([]);
       setSearchCode("");
+      setClientTotalPrice(0);
     } catch (error) {
       const msg = getErrorMessage(error);
       setError(msg);
@@ -86,6 +92,7 @@ export const IssuePage = () => {
         {products.length > 0 && (
           <SummaryPanel
             totalCount={products.length}
+            totalPrice={clientTotalPrice}
             onIssue={handleGiveOutProducts}
             submitting={submitting}
           />

@@ -38,7 +38,7 @@ export const ProductPriceCard = ({
         <button
           onClick={onSave}
           disabled={disabled}
-          className="h-full rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-3 text-sm font-medium text-white shadow-md shadow-green-500/25 transition-all hover:from-green-600 hover:to-emerald-600 disabled:cursor-not-allowed disabled:opacity-50"
+          className="h-full rounded-xl bg-linear-to-r from-green-500 to-emerald-500 px-6 py-3 text-sm font-medium text-white shadow-md shadow-green-500/25 transition-all hover:from-green-600 hover:to-emerald-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Сохранить
         </button>
