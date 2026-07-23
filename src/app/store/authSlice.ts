@@ -117,13 +117,6 @@ export const registerUser = createAsyncThunk(
 
     const loginData = await loginRes.json();
 
-    const user: User = {
-      id: "",
-      fullname: payload.fullname,
-      user_name: payload.user_name,
-      user_email: payload.user_email,
-    };
-
     return {
       user: loginData.user as User,
       token: loginData.access_token as string,

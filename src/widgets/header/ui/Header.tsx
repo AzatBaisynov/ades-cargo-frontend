@@ -8,7 +8,6 @@ import {
   LogIn,
   LogOut,
   User,
-  LogOut,
   Users,
 } from "lucide-react";
 import logo from "@/assets/images/ades.jpg";
