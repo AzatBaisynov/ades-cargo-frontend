@@ -33,8 +33,8 @@ const CargoPricePage = () => {
             setSavedPrice(Number(price));
             setIsSuccessOpen(true);
             setPrice("");
-        } catch (error) {
-            console.log(error);
+        } catch {
+            alert("Ошибка сохранения данных");
         }
     };
 
